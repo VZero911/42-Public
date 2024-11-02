@@ -1,0 +1,79 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
+/*   Updated: 2024/10/30 20:20:54 by jdumay           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
+
+# include "libft/libft.h"
+# include <stdarg.h>
+
+# define SPECIFIER	"cspdiuxX%"
+
+typedef enum e_type
+{
+	SPECIFIER_CHAR		= 0,
+	SPECIFIER_STRING		= 1,
+	SPECIFIER_POINTER		= 2,
+	SPECIFIER_INT		= 3,
+	SPECIFIER_UNSIGNED		= 4,
+	SPECIFIER_HEX_LOW		= 5,
+	SPECIFIER_HEX_UP		= 6,
+	SPECIFIER_PERCENTAGE		= 7,
+	SPECIFIER_NONE		= -1
+}	t_type;
+
+typedef union u_var
+{
+	char			c;
+	char			*s;
+	void			*p;
+	int				i;
+	unsigned int	u;
+	unsigned int	x;
+}	t_var;
+
+typedef struct s_data
+{
+	t_type	type;
+	t_var	var;
+	int		len;
+}	t_struct;
+
+int		ft_printf(const char *str, ...);
+
+int		ft_printf_parsing(const char *str, va_list *args);
+void	ft_get_data(const char **str, va_list *args, t_struct *data);
+void	ft_printf_data(t_struct *data);
+t_type	ft_get_type(char c);
+t_var	ft_get_var(t_struct *data, va_list *args);
+
+void	ft_printf_char(t_struct *data);
+void	ft_printf_string(t_struct *data);
+void	ft_printf_percentage(t_struct *data);
+void	ft_printf_pointer(t_struct *data);
+void	ft_printf_int(t_struct *data);
+
+void	ft_printf_uint(t_struct *data);
+void	ft_printf_hex_low(t_struct *data);
+void	ft_printf_hex_up(t_struct *data);
+
+void	ft_data_len(t_struct *data, int len);
+int		ft_pointer_fd(unsigned long long ptr, char *base);
+int		ft_putnum_fd(int nb, int fd);
+int		ft_putunum_fd(unsigned int nb, int fd);
+
+int		ft_putnbr_hex_low(unsigned int nb);
+int		ft_putnbr_hex_up(unsigned int nb);
+
+int		main(int argc, char **argv);
+
+#endif
