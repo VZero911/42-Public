@@ -6,27 +6,27 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/10 02:18:41 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/10 09:37:29 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ra(t_stack **pile_a, int print)
+void	ra(t_stack **stack_a, int print)
 {
-	if (*pile_a && (*pile_a)->next != *pile_a)
+	if (*stack_a && (*stack_a)->next != *stack_a)
 	{
-		*pile_a = (*pile_a)->next;
+		*stack_a = (*stack_a)->next;
 		if (print)
 			write(1, "ra\n", 3);
 	}
 }
 
-void	rb(t_stack **pile_b, int print)
+void	rb(t_stack **stack_b, int print)
 {
-	if (*pile_b && (*pile_b)->next != *pile_b)
+	if (*stack_b && (*stack_b)->next != *stack_b)
 	{
-		*pile_b = (*pile_b)->next;
+		*stack_b = (*stack_b)->next;
 		if (print)
 			write(1, "rb\n", 3);
 	}

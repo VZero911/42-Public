@@ -6,57 +6,11 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/10 01:58:25 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/11 21:13:30 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
-
-static int	count_nbr(int nbr)
-{
-	int			count;
-	long long	n;
-
-	count = 1;
-	if (nbr < 0)
-	{
-		n = -nbr;
-		++count;
-	}
-	else
-		n = nbr;
-	while (n >= 10)
-	{
-		n /= 10;
-		++count;
-	}
-	return (count);
-}
-
-static char	*ft_ltoa(long n)
-{
-	char		*str;
-	int			i;
-	long		t;
-
-	i = count_nbr(n);
-	str = malloc(sizeof(char) * (i + 1));
-	if (!str)
-		return (NULL);
-	if (n < 0)
-		t = -n;
-	else
-		t = n;
-	str[i] = '\0';
-	while (--i >= 0)
-	{
-		str[i] = (t % 10) + 48;
-		t /= 10;
-	}
-	if (n < 0)
-		str[0] = '-';
-	return (str);
-}
 
 long	ft_atol(const char *nptr)
 {
@@ -79,40 +33,16 @@ long	ft_atol(const char *nptr)
 	return (nbr * signe);
 }
 
-static int	ft_strcmp(const char *s1, const char *s2)
-{
-	unsigned int	i;
-
-	if (!s1 || !s2)
-		return (0);
-	i = 0;
-	while (s1[i] && s2[i])
-	{
-		if (s1[i] != s2[i])
-			return (0);
-		i++;
-	}
-	if (s1[i] == s2[i])
-		return (1);
-	return (0);
-}
-
 int	ft_atol_and_check(const char *nptr, int *error)
 {
-	char	*tmp;
+	long	result;
 
-	if (ft_strlen(nptr) > 11)
+	*error = 0;
+	result = ft_atol(nptr);
+	if (result > INT_MAX || result < INT_MIN)
 	{
 		*error = 1;
-		return (1);
+		return (0);
 	}
-	tmp = ft_ltoa(ft_atol(nptr));
-	if (!ft_strcmp(tmp, nptr))
-	{
-		free(tmp);
-		*error = 1;
-		return (1);
-	}
-	free(tmp);
-	return (ft_atol(nptr));
+	return ((int)result);
 }
