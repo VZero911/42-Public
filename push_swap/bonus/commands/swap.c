@@ -6,11 +6,11 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 05:22:55 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/13 05:24:02 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../checker.h"
 
 void    sa(t_stack **stack_a, int print)
 {

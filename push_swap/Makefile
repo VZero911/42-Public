@@ -1,5 +1,4 @@
 NAME      := push_swap
-NAMEBONUS :=
 CFLAGS     := -Wall -Wextra -Werror 
 LIB	:= libft/libft.a
 
@@ -16,19 +15,25 @@ OBJ      := $(SRC:.c=.o)
 $(NAME):        $(OBJ) $(LIB)
 		cp $(LIB) $(NAME)
 		$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
+
 $(LIB):
 		$(MAKE) -C libft
 
 all:	$(NAME)
 
+bonus:
+		$(MAKE) -C bonus -B
+
 clean:
 		$(MAKE) clean -C libft
 		rm -f $(OBJ)
+		$(MAKE) clean -C bonus
 
 fclean:         clean
 		rm -f $(NAME)
 		rm -f $(LIB)
+		$(MAKE) fclean -C bonus
 
-re:                     fclean all
+re:             fclean all
 
-.PHONY:         all clean fclean re
+.PHONY:         all clean fclean re bonus
