@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/11 21:21:50 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/13 01:20:43 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	start_algo(t_stack *stack_a, t_stack *stack_b, t_median *mq)
 int	initialize_stacks(t_stack **stack_a, t_stack **stack_b, char **spl)
 {
 	int	i;
-	int	t;
+	int	res;
 
 	i = 0;
 	*stack_a = NULL;
@@ -44,8 +44,8 @@ int	initialize_stacks(t_stack **stack_a, t_stack **stack_b, char **spl)
 		i++;
 	while (--i >= 0)
 	{
-		t = add_to_list(stack_a, ft_atol(spl[i]));
-		if (t == -1)
+		res = add_to_list(stack_a, ft_atol(spl[i]));
+		if (res == -1)
 			return (-1);
 		free(spl[i]);
 	}

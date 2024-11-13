@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/11 21:21:46 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/13 01:11:48 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,19 @@ int				get_best_move(t_stack *stack_a, t_stack *stack_b);
 void			quick_sort(int array[], int low, int high);
 char			**my_split(int argc, char **argv);
 int				ft_atol_and_check(const char *nptr, int *error);
-long			ft_atol(const char *nptr);
+long long		ft_atol(const char *nptr);
+
+//Parsing
+
+int				count_split(char **split);
+void			free_split_array(char **split);
+int				check_array_errors(int *array, char **split, t_median *mq);
+int				*create_array(char **split, int split_len);
+int				fill_array(int *array, char **split, int *len, int *error);
+t_median		*create_mq(int *array, int len);
+int				handle_split(char **split);
+int				handle_array(int *array, char **split, int error, int len);
+void			fill_mq(t_median *mq, int *array, int len);
 
 // MAIN
 

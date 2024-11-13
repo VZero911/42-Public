@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/11 21:13:16 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/13 01:15:39 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,19 @@ static bool	has_duplicates(int array[], int len)
 	return (false);
 }
 
-static int	*parse_arguments(int argc, char **argv, int *len, int *error)
+static int	*parse_arguments(char **split, int *len, int *error)
 {
 	int	*array;
-	int	i;
+	int	split_len;
 
-	array = malloc(sizeof(int) * (argc - 1));
+	split_len = count_split(split);
+	array = create_array(split, split_len);
 	if (!array)
 		return (NULL);
-	i = 1;
-	while (i < argc)
+	if (!fill_array(array, split, len, error))
 	{
-		array[*len] = ft_atol_and_check(argv[i], error);
-		if (*error)
-		{
-			free(array);
-			return (NULL);
-		}
-		(*len)++;
-		i++;
+		free(array);
+		return (NULL);
 	}
 	if (has_duplicates(array, *len))
 	{
@@ -61,53 +55,31 @@ static int	*parse_arguments(int argc, char **argv, int *len, int *error)
 	return (array);
 }
 
-static void	fill_mq(t_median *mq, int *array, int len)
-{
-	mq->len = len;
-	mq->med = (len + 1) / 2;
-	mq->quartile1 = (mq->med + 1) / 2;
-	if (mq->med % 2 == 0)
-		mq->quartile1 = mq->med / 2;
-	mq->quartile3 = mq->med + mq->quartile1;
-	if (len > 5)
-	{
-		mq->quartile1 = array[mq->quartile1 - 1];
-		mq->quartile3 = array[mq->quartile3 - 1];
-	}
-	else
-	{
-		mq->quartile1 = 0;
-		mq->quartile3 = 0;
-	}
-	mq->med = array[mq->med - 1];
-}
-
 static void	parsing(int argc, char **argv, t_stack **stack_a, t_stack **stack_b)
 {
 	int			*array;
 	t_median	*mq;
 	int			len;
 	int			error;
+	char		**split;
 
 	len = 0;
 	error = 0;
-	array = parse_arguments(argc, argv, &len, &error);
-	if (error || len == 0 || !array)
-	{
-		write(2, "Error\n", 6);
-		exit (1);
-	}
-	quick_sort(array, 0, len - 1);
-	mq = malloc(sizeof(t_median));
-	if (!mq)
-	{
-		free(array);
+	split = my_split(argc, argv);
+	if (!handle_split(split))
 		return ;
-	}
-	fill_mq(mq, array, len);
+	array = parse_arguments(split, &len, &error);
+	if (!handle_array(array, split, error, len))
+		return ;
+	quick_sort(array, 0, len - 1);
+	mq = create_mq(array, len);
+	if (!mq)
+		check_array_errors(array, split, NULL);
 	free(array);
-	if (initialize_stacks(stack_a, stack_b, my_split(argc, argv)) == 1)
+	if (initialize_stacks(stack_a, stack_b, split) == 1)
 		start_algo(*stack_a, *stack_b, mq);
+	else
+		free_split_array(split);
 }
 
 int	main(int argc, char **argv)
@@ -115,6 +87,8 @@ int	main(int argc, char **argv)
 	t_stack		*stack_a;
 	t_stack		*stack_b;
 
+	stack_a = NULL;
+	stack_b = NULL;
 	if (argc == 1)
 		return (1);
 	parsing(argc, argv, &stack_a, &stack_b);
