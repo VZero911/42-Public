@@ -6,25 +6,25 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 05:20:37 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/18 22:32:08 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void    free_split(char **split)
+void	free_split(char **split)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    if (!split)
-        return ;
-    while (split[i])
-    {
-        free(split[i]);
-        i++;
-    }
-    free(split);
+	i = 0;
+	if (!split)
+		return ;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }
 
 void	free_stack(t_stack **stack)
@@ -79,27 +79,25 @@ int	add_to_list(t_stack **stack, int nbr)
 	return (1);
 }
 
-int initialize_stacks(t_stack **stack_a, t_stack **stack_b, char **spl)
+int	initialize_stacks(t_stack **stack_a, t_stack **stack_b, char **spl)
 {
-    int i;
-    int len;
-    int res;
+	int	i;
+	int	res;
 
-    *stack_a = NULL;
-    *stack_b = NULL;
-    if (!spl)
-        return (-1);
-    len = 0;
-    while (spl[len])
-        len++;
-    i = len;
-    while (--i >= 0)
-    {
-        res = add_to_list(stack_a, ft_atol(spl[i]));
-        if (res == -1)
-            return (-1);
-        free(spl[i]);
-    }
-    free(spl);
-    return (1);
+	i = 0;
+	*stack_a = NULL;
+	*stack_b = NULL;
+	if (!spl)
+		return (-1);
+	while (spl[i])
+		i++;
+	while (--i >= 0)
+	{
+		res = add_to_list(stack_a, ft_atol(spl[i]));
+		if (res == -1)
+			return (-1);
+		free(spl[i]);
+	}
+	free(spl);
+	return (1);
 }

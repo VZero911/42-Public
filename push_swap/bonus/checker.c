@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 05:38:45 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/18 22:31:26 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@
 //     t_stack *current_b;
 //     int first_a = 1;
 //     int first_b = 1;
-
 //     printf("\n=== Stack State ===\n");
-    
 //     // Print Stack A
 //     printf("Stack A: ");
 //     if (stack_a)
@@ -54,64 +52,62 @@
 //     printf("\n================\n\n");
 // }
 
-static int is_sorted(t_stack *stack)
+static int	is_sorted(t_stack *stack)
 {
-    t_stack *current;
+	t_stack	*current;
 
-    if (!stack)
-        return (1);
-    if (stack->next == stack)
-        return (1);
-    current = stack;
-    while (current->next != stack)
-    {
-        if (current->value > current->next->value)
-            return (0);
-        current = current->next;
-    }
-    return (1);
-}
-
-static int execute_operation(char *line, t_stack **stack_a, t_stack **stack_b)
-{
-	if (!ft_strcmp(line, "sa\n"))
-		sa(stack_a, 0);
-	else if (!ft_strcmp(line, "sb\n"))
-		sb(stack_b, 0);
-	else if (!ft_strcmp(line, "ss\n"))
-		ss(stack_a, stack_b, 0);
-	else if (!ft_strcmp(line, "pa\n"))
-		pa(stack_a, stack_b, 0);
-	else if (!ft_strcmp(line, "pb\n"))
-		pb(stack_a, stack_b, 0);
-	else if (!ft_strcmp(line, "ra\n"))
-		ra(stack_a, 0);
-	else if (!ft_strcmp(line, "rb\n"))
-		rb(stack_b, 0);
-	else if (!ft_strcmp(line, "rr\n"))
-		rr(stack_a, stack_b, 0);
-	else if (!ft_strcmp(line, "rra\n"))
-		rra(stack_a, 0);
-	else if (!ft_strcmp(line, "rrb\n"))
-		rrb(stack_b, 0);
-	else if (!ft_strcmp(line, "rrr\n"))
-		rrr(stack_a, stack_b, 0);
-	else
-		return (0);
-	printf("After operation '%s':", line);
-    print_stacks(*stack_a, *stack_b);
+	if (!stack)
+		return (1);
+	if (stack->next == stack)
+		return (1);
+	current = stack;
+	while (current->next != stack)
+	{
+		if (current->value > current->next->value)
+			return (0);
+		current = current->next;
+	}
 	return (1);
 }
 
-static void check_operations(t_stack **stack_a, t_stack **stack_b)
+static int	execute_operation(char *line, t_stack **stack_a, t_stack **stack_b)
 {
-	char    *line;
+	if (ft_strcmp(line, "sa\n"))
+		sa(stack_a, 0);
+	else if (ft_strcmp(line, "sb\n"))
+		sb(stack_b, 0);
+	else if (ft_strcmp(line, "ss\n"))
+		ss(stack_a, stack_b, 0);
+	else if (ft_strcmp(line, "pa\n"))
+		pa(stack_a, stack_b, 0);
+	else if (ft_strcmp(line, "pb\n"))
+		pb(stack_a, stack_b, 0);
+	else if (ft_strcmp(line, "ra\n"))
+		ra(stack_a, 0);
+	else if (ft_strcmp(line, "rb\n"))
+		rb(stack_b, 0);
+	else if (ft_strcmp(line, "rr\n"))
+		rr(stack_a, stack_b, 0);
+	else if (ft_strcmp(line, "rra\n"))
+		rra(stack_a, 0);
+	else if (ft_strcmp(line, "rrb\n"))
+		rrb(stack_b, 0);
+	else if (ft_strcmp(line, "rrr\n"))
+		rrr(stack_a, stack_b, 0);
+	else
+		return (0);
+	return (1);
+}
+
+static void	check_operations(t_stack **stack_a, t_stack **stack_b)
+{
+	char	*line;
 
 	while (1)
 	{
 		line = get_next_line(0);
 		if (!line)
-			break;
+			break ;
 		if (!execute_operation(line, stack_a, stack_b))
 		{
 			free(line);
@@ -124,13 +120,13 @@ static void check_operations(t_stack **stack_a, t_stack **stack_b)
 	}
 }
 
-static int check_duplicates(char **numbers)
+static int	check_duplicates(char **numbers)
 {
-	int i;
-	int j;
-	int error;
-	int num1;
-	int num2;
+	int	i;
+	int	j;
+	int	error;
+	int	num1;
+	int	num2;
 
 	i = 0;
 	while (numbers[i])
@@ -151,11 +147,11 @@ static int check_duplicates(char **numbers)
 	return (0);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-	t_stack *stack_a;
-	t_stack *stack_b;
-	char    **numbers;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+	char	**numbers;
 
 	stack_a = NULL;
 	stack_b = NULL;
@@ -171,16 +167,10 @@ int main(int argc, char *argv[])
 	}
 	if (initialize_stacks(&stack_a, &stack_b, numbers) == -1)
 		return (write(2, "Error\n", 6), 1);
-	printf("Initial state:\n");
-    print_stacks(stack_a, stack_b);
-    
-    check_operations(&stack_a, &stack_b);
-    
-    printf("Final state:\n");
-    print_stacks(stack_a, stack_b);
+	check_operations(&stack_a, &stack_b);
 	if (!stack_b && is_sorted(stack_a))
 		write(1, "OK\n", 3);
 	else
 		write(1, "KO\n", 3);
-	return (free_stack(&stack_a), free_stack(&stack_b),0);
+	return (free_stack(&stack_a), free_stack(&stack_b), 0);
 }

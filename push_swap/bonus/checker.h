@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 04:06:19 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/18 22:28:26 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ char			*get_next_line(int fd);
 void			free_stack(t_stack **stack);
 int				new_node(int nbr, t_stack **node);
 int				add_to_list(t_stack **stack, int nbr);
-int				initialize_stacks(t_stack **stack_a, t_stack **stack_b, char **spl);
+int				initialize_stacks(t_stack **stack_a,
+					t_stack **stack_b, char **spl);
 void			free_split(char **split);
 int				ft_strcmp(const char *s1, const char *s2);
-
 
 void			pa(t_stack **stack_a, t_stack **stack_b, int print);
 void			pb(t_stack **stack_a, t_stack **stack_b, int print);
@@ -65,6 +65,5 @@ char			*ft_strchr_gnl(const char *s, int c);
 void			*ft_memcpy_gnl(void *dest, const void *src, size_t n);
 char			*ft_strdup_gnl(const char *s);
 char			*free_and_return(char **ptr);
-
 
 #endif

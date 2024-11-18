@@ -6,53 +6,51 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/13 05:40:38 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/18 22:27:16 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void print_stacks(t_stack *stack_a, t_stack *stack_b)
-{
-    t_stack *current_a;
-    t_stack *current_b;
-    int first_a = 1;
-    int first_b = 1;
-
-    printf("\n=== Stack State ===\n");
-    
-    // Print Stack A
-    printf("Stack A: ");
-    if (stack_a)
-    {
-        current_a = stack_a;
-        do {
-            if (!first_a)
-                printf(" -> ");
-            printf("%d", current_a->value);
-            first_a = 0;
-            current_a = current_a->next;
-        } while (current_a != stack_a);
-    }
-    else
-        printf("(empty)");
-    printf("\n");
-    printf("Stack B: ");
-    if (stack_b)
-    {
-        current_b = stack_b;
-        do {
-            if (!first_b)
-                printf(" -> ");
-            printf("%d", current_b->value);
-            first_b = 0;
-            current_b = current_b->next;
-        } while (current_b != stack_b);
-    }
-    else
-        printf("(empty)");
-    printf("\n================\n\n");
-}
+// void print_stacks(t_stack *stack_a, t_stack *stack_b)
+// {
+//     t_stack *current_a;
+//     t_stack *current_b;
+//     int first_a = 1;
+//     int first_b = 1;
+//     printf("\n=== Stack State ===\n");
+//     // Print Stack A
+//     printf("Stack A: ");
+//     if (stack_a)
+//     {
+//         current_a = stack_a;
+//         do {
+//             if (!first_a)
+//                 printf(" -> ");
+//             printf("%d", current_a->value);
+//             first_a = 0;
+//             current_a = current_a->next;
+//         } while (current_a != stack_a);
+//     }
+//     else
+//         printf("(empty)");
+//     printf("\n");
+//     printf("Stack B: ");
+//     if (stack_b)
+//     {
+//         current_b = stack_b;
+//         do {
+//             if (!first_b)
+//                 printf(" -> ");
+//             printf("%d", current_b->value);
+//             first_b = 0;
+//             current_b = current_b->next;
+//         } while (current_b != stack_b);
+//     }
+//     else
+//         printf("(empty)");
+//     printf("\n================\n\n");
+// }
 
 static bool	has_duplicates(int array[], int len)
 {
