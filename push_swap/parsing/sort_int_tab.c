@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quick_sort.c                                       :+:      :+:    :+:   */
+/*   sort_int_tab.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -43,14 +43,14 @@ static int	partition(int array[], int low, int high)
 	return (i + 1);
 }
 
-void	quick_sort(int array[], int low, int high)
+void	sort_int_tab(int array[], int low, int high)
 {
 	int	pivot;
 
 	if (low < high)
 	{
 		pivot = partition(array, low, high);
-		quick_sort(array, low, pivot - 1);
-		quick_sort(array, pivot + 1, high);
+		sort_int_tab(array, low, pivot - 1);
+		sort_int_tab(array, pivot + 1, high);
 	}
 }

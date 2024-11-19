@@ -4,7 +4,7 @@ LIB	:= libft/libft.a
 
 SRC	:=	commands/push.c commands/rev_rotate.c commands/rotate.c commands/swap.c \
 		utils/calcul_utils.c utils/get_functions.c utils/stacks_init.c utils/stacks_utils.c \
-		parsing/ft_atol.c parsing/my_split.c parsing/push_swap.c parsing/quick_sort.c \
+		parsing/ft_atol.c parsing/my_split.c parsing/push_swap.c parsing/sort_int_tab.c \
 		parsing/parsing.c parsing/parsing_utils.c algo/push_swap_algo.c algo/sort_utils.c \
 
 OBJ      := $(SRC:.c=.o)
@@ -22,7 +22,7 @@ $(LIB):
 all:	$(NAME)
 
 bonus:
-		$(MAKE) -C bonus -B
+		$(MAKE) -C bonus
 
 clean:
 		$(MAKE) clean -C libft

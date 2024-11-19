@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calcul_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/10 01:55:08 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/20 00:02:54 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,25 +49,4 @@ int	inner(t_stack *stack, int q1, int q2)
 		++i;
 	}
 	return (0);
-}
-
-void	replace_stack(t_stack **stack)
-{
-	int		m;
-	int		index;
-	t_stack	*stack_a;
-
-	stack_a = *stack;
-	m = get_min(stack_a);
-	if (stack_a->value != m)
-	{
-		index = get_index(stack_a, m);
-		if (index <= stack_len(stack_a) / 2)
-			while (stack_a->value != m)
-				ra(&stack_a, 1);
-		else
-			while (stack_a->value != m)
-				rra(&stack_a, 1);
-	}
-	(*stack) = stack_a;
 }
