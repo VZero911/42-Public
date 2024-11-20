@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/18 17:07:33 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/20 03:26:26 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int				get_best_move(t_stack *stack_a, t_stack *stack_b);
 
 // Median and quartill + Error gestion
 
-void			quick_sort(int array[], int low, int high);
+void			sort_int_tab(int array[], int low, int high);
 char			**my_split(int argc, char **argv);
 int				ft_atol_and_check(const char *nptr, int *error);
 long long		ft_atol(const char *nptr);

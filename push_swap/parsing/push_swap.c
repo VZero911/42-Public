@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/19 23:06:16 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/20 03:27:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ static void	parsing(int argc, char **argv, t_stack **stack_a, t_stack **stack_b)
 	array = parse_arguments(split, &len, &error);
 	if (!handle_array(array, split, error, len))
 		return ;
-	quick_sort(array, 0, len - 1);
+	sort_int_tab(array, 0, len - 1);
 	mq = create_mq(array, len);
 	if (!mq)
 		check_array_errors(array, split, NULL);
