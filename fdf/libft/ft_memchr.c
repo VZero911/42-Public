@@ -1,40 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 22:50:13 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/20 03:23:16 by marvin           ###   ########.fr       */
+/*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
+/*   Updated: 2024/09/18 23:39:52 by salieri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_memchr(const void *ptr, int ch, size_t size)
 {
-	t_fdf	*data;
-
-	if (argc != 2)
-		return (0);
-	data = (t_fdf *)malloc(sizeof(t_fdf));
-	if (!data)
-		return (0);
-	read_file(argv[1], data);
-	int	i;
-	int	j;
-	i = 0;
-	while (i < data->height)
+	while (size--)
 	{
-		j = 0;
-		while (j < data->width)
-		{
-			ft_printf("%d ", data->z_matrix[i][j]);
-			j++;
-		}
-		ft_printf("\n");
-		i++;
+		if (*(unsigned char *)ptr++ == (unsigned char)ch)
+			return ((void *)((unsigned char *)ptr - 1));
 	}
-	free_data(data);
+	return (NULL);
 }
+
+/*int main(){
+	const char *src="www.google.com";
+	unsigned char c ='.';
+	const char *ret;
+
+	ret = ft_memchr(src, c, sizeof(src));
+	printf("%s\n", ret);
+	return 0;
+
+}*/

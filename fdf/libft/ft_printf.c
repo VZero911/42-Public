@@ -1,40 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 22:50:13 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/20 03:23:16 by marvin           ###   ########.fr       */
+/*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
+/*   Updated: 2024/09/28 19:12:44 by salieri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+int	ft_printf(const char *__format, ...)
 {
-	t_fdf	*data;
+	va_list	args;
+	int		len;
 
-	if (argc != 2)
-		return (0);
-	data = (t_fdf *)malloc(sizeof(t_fdf));
-	if (!data)
-		return (0);
-	read_file(argv[1], data);
-	int	i;
-	int	j;
-	i = 0;
-	while (i < data->height)
-	{
-		j = 0;
-		while (j < data->width)
-		{
-			ft_printf("%d ", data->z_matrix[i][j]);
-			j++;
-		}
-		ft_printf("\n");
-		i++;
-	}
-	free_data(data);
+	len = 0;
+	va_start(args, __format);
+	len = ft_printf_parsing(__format, &args);
+	va_end(args);
+	return (len);
 }

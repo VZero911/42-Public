@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/18 22:50:13 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/20 03:23:16 by marvin           ###   ########.fr       */
+/*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
+/*   Updated: 2024/09/22 18:46:24 by salieri          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *))
 {
-	t_fdf	*data;
+	t_list	*list;
+	t_list	*node;
 
-	if (argc != 2)
-		return (0);
-	data = (t_fdf *)malloc(sizeof(t_fdf));
-	if (!data)
-		return (0);
-	read_file(argv[1], data);
-	int	i;
-	int	j;
-	i = 0;
-	while (i < data->height)
+	if (!lst || !f || !del)
+		return (NULL);
+	list = NULL;
+	node = NULL;
+	while (lst)
 	{
-		j = 0;
-		while (j < data->width)
+		node = ft_lstnew(NULL);
+		if (!node)
 		{
-			ft_printf("%d ", data->z_matrix[i][j]);
-			j++;
+			ft_lstclear(&list, del);
+			return (NULL);
 		}
-		ft_printf("\n");
-		i++;
+		node->content = f(lst->content);
+		ft_lstadd_back(&list, node);
+		lst = lst->next;
 	}
-	free_data(data);
+	return (list);
 }
