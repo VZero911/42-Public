@@ -14,7 +14,7 @@ $(NAME):        $(OBJ) $(LIB)
 		$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
 
 $(LIB):
-		$(MAKE) -C libft
+		$(MAKE) -C libft		
 
 all:	$(NAME)
 
