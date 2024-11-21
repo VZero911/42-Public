@@ -22,11 +22,9 @@ int	check_file_name(char *file_name)
 {
 	int	i;
 
-	if (!file_name)
-		error("Empty File_Name !");
 	i = ft_strlen(file_name);
-	if (file_name[i -1] != 'f' || file_name[i -2] != 'd'
-		|| file_name[i - 3] != 'f')
+	if (file_name[i - 1] != 'f' || file_name[i - 2] != 'd' || i < 4
+		|| file_name[i - 3] != 'f' || file_name[i - 4] != '.')
 		error("Wrong Format should be <.fdf>");
 	return (0);
 }

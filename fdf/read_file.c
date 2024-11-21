@@ -24,7 +24,7 @@ void	read_file(t_fdf *data)
 	check_map(data);
 	data->z_matrix = create_matrix(data->height, data->width);
 	if (!data->z_matrix)
-		error("Malloc Error Matrix !");
+		error("Malloc Matrix Error !");
 	fd = open(data->file_name, O_RDONLY);
 	i = -1;
 	line = get_next_line(fd);
