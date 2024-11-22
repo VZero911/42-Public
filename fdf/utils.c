@@ -23,19 +23,44 @@ int	check_file_name(char *file_name)
 	int	i;
 
 	i = ft_strlen(file_name);
+	if (i < 4)
+		error("Wrong Format should be <.fdf>");
 	if (file_name[i - 1] != 'f' || file_name[i - 2] != 'd' || i < 4
 		|| file_name[i - 3] != 'f' || file_name[i - 4] != '.')
 		error("Wrong Format should be <.fdf>");
 	return (0);
 }
 
-void	free_data(t_fdf *data)
+void	free_split(char **split)
 {
 	int	i;
 
 	i = 0;
-	while (i < data->height)
-		free(data->z_matrix[i++]);
-	free(data->z_matrix);
-	free(data);
+	while (split[i])
+		free(split[i++]);
+	free(split);
+}
+
+void	free_matrix(int **matrix, int height)
+{
+	int	i;
+
+	i = height;
+	while (i >= 0)
+		free(matrix[i--]);
+	free(matrix);
+}
+
+int     calculate_color(int z1, int z2)
+{
+    int max_z;
+
+    max_z = z1;
+    if (z2 > max_z)
+        max_z = z2;
+    if (max_z > 10)
+        return (0xFF0000);
+    if (max_z > 5)
+        return (0x00FF00);
+    return (0x0000FF);
 }

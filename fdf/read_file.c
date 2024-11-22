@@ -1,99 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:13 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/21 02:42:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/21 21:02:06 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	read_file(t_fdf *data)
-{
-	char	*line;
-	int		fd;
-	int		i;
-
-	data->height = 0;
-	data->width = 0;
-	get_dimention(data);
-	check_map(data);
-	data->z_matrix = create_matrix(data->height, data->width);
-	if (!data->z_matrix)
-		error("Malloc Matrix Error !");
-	fd = open(data->file_name, O_RDONLY);
-	i = -1;
-	line = get_next_line(fd);
-	while (line && i++ < data->height)
-	{
-		fill_matrix(data->z_matrix[i], line, data->width);
-		free(line);
-		line = get_next_line(fd);
-	}
-	free(line);
-	close(fd);
-}
-
-void	get_dimention(t_fdf *data)
-{
-	char	*line;
-	char	**tab;
-	int		fd;
-
-	fd = open(data->file_name, O_RDONLY);
-	if (fd < 0)
-		error("Map Error !");
-	line = get_next_line(fd);
-	if (!line)
-		error("Map Empty !");
-	tab = ft_split(line, ' ');
-	while (tab[data->width])
-	{
-		free(tab[data->width]);
-		data->width++;
-	}
-	while (line)
-	{
-		free(line);
-		data->height++;
-		line = get_next_line(fd);
-	}
-	free(line);
-	free(tab);
-	close (fd);
-}
-
-void	check_map(t_fdf *data)
-{
-	char	**split;
-	char	*line;
-	int		fd;
-	int		x;
-
-	fd = open(data->file_name, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		split = ft_split(line, ' ');
-		free(line);
-		x = 0;
-		while (split[x])
-		{
-			free(split[x]);
-			x++;
-		}
-		free(split);
-		if (x < data->width || x > data->width)
-			error("Wrong Format !");
-		line = get_next_line(fd);
-	}
-	free(line);
-	close(fd);
-}
 
 int	**create_matrix(int height, int width)
 {
@@ -109,9 +26,7 @@ int	**create_matrix(int height, int width)
 		matrix[i] = (int *)malloc(sizeof(int) * width);
 		if (!matrix[i])
 		{
-			while (--i >= 0)
-				free(matrix[i]);
-			free(matrix);
+			free_matrix(matrix, i - 1);
 			return (NULL);
 		}
 		i++;
@@ -119,22 +34,84 @@ int	**create_matrix(int height, int width)
 	return (matrix);
 }
 
-void	fill_matrix(int *z_line, char *line, int width)
+void	fill_matrix_line(int *z_line, char *line, int width)
 {
 	char	**nums;
 	int		i;
 
-	i = 0;
 	nums = ft_split(line, ' ');
 	if (!nums)
 		return ;
+	i = 0;
 	while (nums[i] && i < width)
 	{
 		z_line[i] = ft_atoi(nums[i]);
-		free(nums[i]);
 		i++;
 	}
-	while (nums[i])
-		free(nums[i++]);
-	free(nums);
+	free_split(nums);
+}
+
+void	validate_map(t_fdf *data)
+{
+	char	*line;
+	int		fd;
+
+	fd = open(data->file_name, O_RDONLY);
+	if (fd < 0)
+		error("Cannot open file");
+	line = get_next_line(fd);
+	while (line)
+	{
+		process_line_width(data, line);
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+}
+
+void	get_map_dimensions(t_fdf *data)
+{
+	int		fd;
+	char	*line;
+
+	data->height = 0;
+	data->width = 0;
+	fd = open(data->file_name, O_RDONLY);
+	if (fd < 0)
+		error("Cannot open file");
+	line = get_next_line(fd);
+	if (!line)
+		error("Empty file");
+	init_width(data, line);
+	data->height = 1;
+	while ((line = get_next_line(fd)))
+	{
+		data->height++;
+		free(line);
+	}
+	close(fd);
+}
+
+void	read_file(t_fdf *data)
+{
+	int		fd;
+	char	*line;
+	int		i;
+
+	get_map_dimensions(data);
+	validate_map(data);
+	data->z_matrix = create_matrix(data->height, data->width);
+	if (!data->z_matrix)
+		error("Matrix allocation failed");
+	fd = open(data->file_name, O_RDONLY);
+	if (fd < 0)
+		error("Cannot reopen file");
+	i = 0;
+	while (i < data->height && (line = get_next_line(fd)))
+	{
+		fill_matrix_line(data->z_matrix[i], line, data->width);
+		free(line);
+		i++;
+	}
+	close(fd);
 }

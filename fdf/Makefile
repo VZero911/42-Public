@@ -1,31 +1,36 @@
-NAME      := fdf
-CFLAGS     := -Wall -Wextra -Werror 
-LIB	:= libft/libft.a
+NAME := fdf
+CFLAGS := -Wall -Wextra -Werror
+LIB := libft/libft.a
+MINILIBX := minilibx/libmlx.a
+SRC := fdf.c read_file.c parsing_utils.c utils.c data_init.c draw_map.c \
 
-SRC	:=	fdf.c read_file.c utils.c
+OBJ := $(SRC:.c=.o)
 
-OBJ      := $(SRC:.c=.o)
+LIBS := -lX11 -lXext -lm -lz
 
-%.o:            %.c
-		$(CC) $(CFLAGS) -c $< -o $@
+all: $(NAME)
 
-$(NAME):        $(OBJ) $(LIB)
-		cp $(LIB) $(NAME)
-		$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(NAME): $(OBJ) $(LIB) $(MINILIBX)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB) $(MINILIBX) $(LIBS)
 
 $(LIB):
-		$(MAKE) -C libft		
+	$(MAKE) -C libft
 
-all:	$(NAME)
+$(MINILIBX):
+	$(MAKE) -C minilibx
 
 clean:
-		$(MAKE) clean -C libft
-		rm -f $(OBJ)
+	$(MAKE) clean -C libft
+	$(MAKE) clean -C minilibx
+	rm -f $(OBJ)
 
-fclean:         clean
-		rm -f $(NAME)
-		rm -f $(LIB)
+fclean: clean
+	rm -f $(NAME)
+	$(MAKE) fclean -C libft
 
-re:             fclean all
+re: fclean all
 
-.PHONY:         all clean fclean re
+.PHONY: all clean fclean re

@@ -12,7 +12,8 @@
 
 #include "fdf.h"
 
-int	data_init(t_fdf *data)
+
+int data_init(t_fdf *data)
 {
 	data->mlx_ptr = mlx_init();
 	if (!data->mlx_ptr)
@@ -24,7 +25,7 @@ int	data_init(t_fdf *data)
 	if (!data->image)
 		return (MLX_ERROR);
 	data->adress = mlx_get_data_addr(data->image, &data->bits_per_pixel,
-            &data->line_length, &data->endian);
+			&data->line_length, &data->endian);
 	if (!data->adress)
 		return (MLX_ERROR);
 	data->zoom = 0;

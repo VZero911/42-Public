@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:13 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/21 04:46:19 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/22 00:15:35 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 // {
 // 	int	i;
 // 	int	j;
-
+//
 // 	i = 0;
 // 	while (i < data->height)
 // 	{
@@ -43,6 +43,7 @@ int	main(int argc, char **argv)
 			error("Malloc error");
 		data->file_name = argv[1];
 		read_file(data);
+		data_init(data);
 		free_data(data);
 	}
 	else
