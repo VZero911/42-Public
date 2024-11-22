@@ -60,8 +60,8 @@ t_point project_point(t_fdf *data, int x, int y, int z)
 void    draw_map(t_fdf *data)
 {
 	if (!data->zoom)
-		data->zoom = fmin(WIN_WIDTH / (3 * data->width), 
-						 WIN_HEIGHT / (3 * data->height));
+		data->zoom = fmin(WIN_WIDTH / (2 * data->width), 
+						 WIN_HEIGHT / (2 * data->height));
 	data->y = 0;
 	while (data->y < data->height)
 	{
