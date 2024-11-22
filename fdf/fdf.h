@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:02 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/22 00:08:25 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/22 18:45:39 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FDF_H
 # include "libft/libft.h"
 # include "minilibx/mlx.h"
+# include "X11/keysym.h"
 # include "math.h"
 
 # define WIN_WIDTH 1920

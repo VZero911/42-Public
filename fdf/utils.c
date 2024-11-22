@@ -18,17 +18,15 @@ int	error(char *str)
 	exit (1);
 }
 
-int	check_file_name(char *file_name)
+void	free_data(t_fdf *data)
 {
 	int	i;
 
-	i = ft_strlen(file_name);
-	if (i < 4)
-		error("Wrong Format should be <.fdf>");
-	if (file_name[i - 1] != 'f' || file_name[i - 2] != 'd' || i < 4
-		|| file_name[i - 3] != 'f' || file_name[i - 4] != '.')
-		error("Wrong Format should be <.fdf>");
-	return (0);
+	i = 0;
+	while (i < data->height)
+		free(data->z_matrix[i++]);
+	free(data->z_matrix);
+	free(data);
 }
 
 void	free_split(char **split)

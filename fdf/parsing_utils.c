@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:13 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/21 22:10:29 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/22 18:12:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,15 @@ void	process_line_width(t_fdf *data, char *line)
 	}
 }
 
-void	free_data(t_fdf *data)
+int	check_file_name(char *file_name)
 {
 	int	i;
 
-	i = 0;
-	while (i < data->height)
-		free(data->z_matrix[i++]);
-	free(data->z_matrix);
-	free(data);
+	i = ft_strlen(file_name);
+	if (i < 4)
+		error("Wrong Format should be <.fdf>");
+	if (file_name[i - 1] != 'f' || file_name[i - 2] != 'd' || i < 4
+		|| file_name[i - 3] != 'f' || file_name[i - 4] != '.')
+		error("Wrong Format should be <.fdf>");
+	return (0);
 }
