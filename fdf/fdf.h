@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:02 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/23 01:44:19 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/23 05:37:01 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,26 @@
 # define KEY_A XK_a
 # define KEY_S XK_s
 # define KEY_D XK_d
+# define KEY_Q XK_q
+# define KEY_E XK_e
+# define KEY_P XK_p
+# define KEY_I XK_i
 # define KEY_ESC XK_Escape
 # define MOVE_SPEED 2
+# define ROTATE_ANGLE 0.1
+# define KEY_UP      65362
+# define KEY_DOWN    65364
+# define KEY_LEFT    65361
+# define KEY_RIGHT   65363
+
+typedef enum e_projection
+{
+    ISO = 1,
+    PARALLEL = 2,
+	TOP = 3,
+    MILITARY = 4,
+    CABINET = 5
+}	t_projection;
 
 typedef struct s_point
 {
@@ -40,6 +58,7 @@ typedef struct s_point
 	double  y;
 	int     z;
 	int     color;
+    int		init_color;
 	double  delta_x;
 	double  delta_y;
 	int     steps;
@@ -60,14 +79,19 @@ typedef struct s_fdf
 	int     width;
 	int     height;
 	int     **z_matrix;
+	int		**color_matrix;
 	double     zoom;
 	int     x;
 	int     y;
 	int		shift_x;
-	int		shift_y;	
+	int		shift_y;
+	double rotation_x;
+    double rotation_y;
+    double rotation_z;
 	t_point current;
 	t_point right;
 	t_point down;
+	t_projection projection;
 }	t_fdf;
 
 void	read_file(t_fdf *data);
@@ -77,18 +101,25 @@ int		**create_matrix(int height, int width);
 void	fill_matrix_line(int *z_line, char *line, int width);
 
 int		data_init(t_fdf *data);
+int		error(char *str);
 
 void    draw_map(t_fdf *data);
+int		handle_close(t_fdf *data);
 
 int		check_file_name(char *file_name);
 void	free_matrix(int **matrix, int height);
 void	free_split(char **split);
 int     calculate_color(int z1, int z2);
-int		error(char *str);
 
 void	init_width(t_fdf *data, char *line);
 int		count_split_elements(char **split);
 void	process_line_width(t_fdf *data, char *line);
 void	free_data(t_fdf *data);
+
+t_point	project_parallel(double x, double y, double z, t_fdf *data);
+t_point	project_isometric(double x, double y, double z, t_fdf *data);
+t_point project_top(double x, double y, double z, t_fdf *data);
+t_point project_military(double x, double y, double z, t_fdf *data);
+t_point project_cabinet(double x, double y, double z, t_fdf *data);
 
 #endif

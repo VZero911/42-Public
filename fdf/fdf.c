@@ -6,30 +6,17 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:13 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/23 01:44:22 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/23 05:42:09 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// void	print_data(t_fdf *data)
-// {
-// 	int	i;
-// 	int	j;
-//
-// 	i = 0;
-// 	while (i < data->height)
-// 	{
-// 		j = 0;
-// 		while (j < data->width)
-// 		{
-// 			ft_printf("%d ", data->z_matrix[i][j]);
-// 			j++;
-// 		}
-// 		ft_printf("\n");
-// 		i++;
-// 	}
-// }
+int	error(char *str)
+{
+	ft_printf("%s\n", str);
+	exit (1);
+}
 
 int	main(int argc, char **argv)
 {
@@ -46,7 +33,11 @@ int	main(int argc, char **argv)
 		data->y = 0;
 		data->x = 0;
 		data->shift_x = 0;
-    	data->shift_y = 0;
+		data->shift_y = 0;
+		data->rotation_x = 0.0;
+		data->rotation_y = 0.0;
+		data->rotation_z = 0.0;
+		data->projection = ISO;
 		read_file(data);
 		data_init(data);
 		free_data(data);

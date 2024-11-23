@@ -2,7 +2,7 @@ NAME := fdf
 CFLAGS := -Wall -Wextra -Werror
 LIB := libft/libft.a
 MINILIBX := minilibx/libmlx.a
-SRC := fdf.c read_file.c parsing_utils.c utils.c data_init.c draw_map.c \
+SRC := fdf.c read_file.c parsing_utils.c utils.c data_init.c draw_map.c projection.c \
 
 OBJ := $(SRC:.c=.o)
 

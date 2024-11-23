@@ -84,11 +84,14 @@ void	get_map_dimensions(t_fdf *data)
 		error("Empty file");
 	init_width(data, line);
 	data->height = 1;
-	while ((line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (line)
 	{
 		data->height++;
 		free(line);
+		line = get_next_line(fd);
 	}
+	free(line);
 	close(fd);
 }
 
@@ -107,11 +110,13 @@ void	read_file(t_fdf *data)
 	if (fd < 0)
 		error("Cannot reopen file");
 	i = 0;
-	while (i < data->height && (line = get_next_line(fd)))
+	line = get_next_line(fd);
+	while (i < data->height && line)
 	{
 		fill_matrix_line(data->z_matrix[i], line, data->width);
 		free(line);
 		i++;
+		line = get_next_line(fd);
 	}
 	close(fd);
 }
