@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:02 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/22 18:45:39 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/23 01:44:19 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,25 @@
 # define FDF_H
 # include "libft/libft.h"
 # include "minilibx/mlx.h"
-# include "X11/keysym.h"
+# include <X11/keysym.h>
+# include <X11/XKBlib.h>
 # include "math.h"
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
+# define MAX_SHIFT (WIN_WIDTH / 2)
 # define MLX_ERROR 1
 # define ISO_ANGLES 0.523599
+# define Event_close 17
+# define MOUSE_WHEEL_DOWN 4
+# define MOUSE_WHEEL_UP 5
+# define ZOOM_FACTOR 1.1
+# define KEY_W XK_w
+# define KEY_A XK_a
+# define KEY_S XK_s
+# define KEY_D XK_d
+# define KEY_ESC XK_Escape
+# define MOVE_SPEED 2
 
 typedef struct s_point
 {
@@ -48,9 +60,11 @@ typedef struct s_fdf
 	int     width;
 	int     height;
 	int     **z_matrix;
-	int     zoom;
+	double     zoom;
 	int     x;
 	int     y;
+	int		shift_x;
+	int		shift_y;	
 	t_point current;
 	t_point right;
 	t_point down;

@@ -57,8 +57,9 @@ int     calculate_color(int z1, int z2)
     if (z2 > max_z)
         max_z = z2;
     if (max_z > 10)
-        return (0xFF0000);
+        return (0xFF00FF);
     if (max_z > 5)
-        return (0x00FF00);
-    return (0x0000FF);
+        return (0xFF00FF);
+    return (0x00FF00);
 }
+
