@@ -52,31 +52,3 @@ void	free_matrix(int **matrix, int height)
 		free(matrix[i--]);
 	free(matrix);
 }
-
-int	calculate_color(int z1, int z2)
-{
-	int	max_z;
-
-	max_z = z1;
-	if (z2 > max_z)
-		max_z = z2;
-	if (max_z <= 5)
-		return (0x00008B);
-	if (max_z <= 10)
-		return (0x1E90FF);
-	if (max_z <= 15)
-		return (0x00BFFF);
-	if (max_z <= 20)
-		return (0x7CFC00);
-	if (max_z <= 30)
-		return (0x32CD32);
-	if (max_z <= 40)
-		return (0x228B22);
-	if (max_z <= 50)
-		return (0x6B8E23);
-	if (max_z <= 60)
-		return (0x8B4513);
-	if (max_z <= 70)
-		return (0xA0522D);
-	return (0xFFFFFF);
-}

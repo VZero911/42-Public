@@ -82,7 +82,6 @@ int	handle_keypress(int keysym, t_fdf *data)
 	if (!data->adress)
 		return (MLX_ERROR);
 	draw_map(data);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->image, 0, 0);
 	return (0);
 }
 
