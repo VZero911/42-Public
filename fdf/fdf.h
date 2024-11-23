@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:02 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/23 05:37:01 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/23 07:57:20 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@
 # define KEY_E XK_e
 # define KEY_P XK_p
 # define KEY_I XK_i
+# define KEY_SPACE XK_space
 # define KEY_ESC XK_Escape
 # define MOVE_SPEED 2
 # define ROTATE_ANGLE 0.1
@@ -105,6 +106,7 @@ int		error(char *str);
 
 void    draw_map(t_fdf *data);
 int		handle_close(t_fdf *data);
+int		process_space(int keysym, t_fdf *data);
 
 int		check_file_name(char *file_name);
 void	free_matrix(int **matrix, int height);

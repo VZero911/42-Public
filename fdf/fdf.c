@@ -6,17 +6,11 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:13 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/23 05:42:09 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/23 06:12:46 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-int	error(char *str)
-{
-	ft_printf("%s\n", str);
-	exit (1);
-}
 
 int	main(int argc, char **argv)
 {

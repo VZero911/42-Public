@@ -73,6 +73,7 @@ int	process_keypress(int keysym, t_fdf *data)
 int	handle_keypress(int keysym, t_fdf *data)
 {
 	process_keypress(keysym, data);
+	process_space(keysym, data);
 	mlx_destroy_image(data->mlx_ptr, data->image);
 	data->image = mlx_new_image(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	if (!data->image)

@@ -22,6 +22,12 @@ int	handle_close(t_fdf *data)
 	exit (1);
 }
 
+int	error(char *str)
+{
+	ft_printf("%s\n", str);
+	exit (1);
+}
+
 void	free_data(t_fdf *data)
 {
 	int	i;

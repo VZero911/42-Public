@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 05:59:06 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/23 06:04:36 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/23 08:01:08 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,28 @@ int	calculate_color(int z1, int z2)
 	if (color != -1)
 		return (color);
 	return (calculate_high_color(max_z));
+}
+
+int	process_space(int keysym, t_fdf *data)
+{
+	if (keysym == KEY_SPACE)
+	{
+		data->zoom = 5.0;
+		data->shift_x = 0;
+		data->shift_y = 0;
+		data->rotation_x = 0.0;
+		data->rotation_y = 0.0;
+		data->rotation_z = 0.0;
+		data->projection = ISO;
+	}
+	mlx_destroy_image(data->mlx_ptr, data->image);
+	data->image = mlx_new_image(data->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	if (!data->image)
+		return (MLX_ERROR);
+	data->adress = mlx_get_data_addr(data->image, &data->bits_per_pixel,
+			&data->line_length, &data->endian);
+	if (!data->adress)
+		return (MLX_ERROR);
+	draw_map(data);
+	return (0);
 }
