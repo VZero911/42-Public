@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/18 17:04:41 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/23 12:18:59 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,16 @@ int	ft_atol_and_check(const char *nptr, int *error)
 	*error = 0;
 	result = ft_atol(nptr);
 	tmp = ft_ltoa(ft_atol(nptr));
-	if (result > INT_MAX || result < INT_MIN || !ft_strcmp(tmp, nptr))
+	if (nptr[0] == '+')
+	{
+		if (result > INT_MAX || result < INT_MIN || !ft_strcmp(tmp, (nptr + 1)))
+		{
+			free(tmp);
+			*error = 1;
+			return (0);
+		}
+	}
+	else if (result > INT_MAX || result < INT_MIN || !ft_strcmp(tmp, nptr))
 	{
 		free(tmp);
 		*error = 1;

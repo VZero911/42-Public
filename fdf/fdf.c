@@ -16,7 +16,7 @@ int	main(int argc, char **argv)
 {
 	t_fdf	*data;
 
-	if (argc == 2 || argc == 4)
+	if (argc == 2)
 	{
 		check_file_name(argv[1]);
 		data = (t_fdf *)malloc(sizeof(t_fdf));
