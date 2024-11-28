@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:02 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/23 07:57:20 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/28 17:05:42 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define KEY_I XK_i
 # define KEY_SPACE XK_space
 # define KEY_ESC XK_Escape
-# define MOVE_SPEED 2
+# define MOVE_SPEED 1
 # define ROTATE_ANGLE 0.1
 # define KEY_UP      65362
 # define KEY_DOWN    65364

@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "thread": "c",
+        "__locale": "c",
+        "locale": "c"
+    }
+}
