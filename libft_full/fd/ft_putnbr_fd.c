@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/29 03:06:09 by jdumay           ###   ########.fr       */
+/*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
+/*   Updated: 2024/11/28 23:59:14 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../libft.h"
 
-int	main(int argc, char **argv, char **env)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_pipex	pipex;
-
-	if (argc != 5)
+	if (n == -2147483648)
+		return (ft_putstr_fd("-2147483648", fd));
+	if (n < 0)
 	{
-		ft_putstr_fd("Usage: ./pipex infile \"cmd1\" \"cmd2\" outfile\n", 2);
-		return (1);
+		ft_putchar_fd('-', fd);
+		n *= -1;
 	}
-	pipex.input_file = argv[1];
-	pipex.output_file = argv[argc - 1];
-	if (validate_files(pipex.input_file, pipex.output_file) < 0)
-		return (1);
-	if (argc == 5)
-		execute_pipex(&pipex, argv, env);
-	return (0);
+	if (n >= 10)
+		ft_putnbr_fd(n / 10, fd);
+	ft_putchar_fd(n % 10 + '0', fd);
 }

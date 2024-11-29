@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/29 03:06:09 by jdumay           ###   ########.fr       */
+/*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
+/*   Updated: 2024/11/28 23:57:56 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../libft.h"
 
-int	main(int argc, char **argv, char **env)
+void	*ft_memchr(const void *ptr, int ch, size_t size)
 {
-	t_pipex	pipex;
-
-	if (argc != 5)
+	while (size--)
 	{
-		ft_putstr_fd("Usage: ./pipex infile \"cmd1\" \"cmd2\" outfile\n", 2);
-		return (1);
+		if (*(unsigned char *)ptr++ == (unsigned char)ch)
+			return ((void *)((unsigned char *)ptr - 1));
 	}
-	pipex.input_file = argv[1];
-	pipex.output_file = argv[argc - 1];
-	if (validate_files(pipex.input_file, pipex.output_file) < 0)
-		return (1);
-	if (argc == 5)
-		execute_pipex(&pipex, argv, env);
-	return (0);
+	return (NULL);
 }
+
+/*int main(){
+	const char *src="www.google.com";
+	unsigned char c ='.';
+	const char *ret;
+
+	ret = ft_memchr(src, c, sizeof(src));
+	printf("%s\n", ret);
+	return 0;
+
+}*/

@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/29 03:06:09 by jdumay           ###   ########.fr       */
+/*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
+/*   Updated: 2024/11/28 23:57:20 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../libft.h"
 
-int	main(int argc, char **argv, char **env)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	t_pipex	pipex;
+	char	*dest;
+	size_t	i;
 
-	if (argc != 5)
-	{
-		ft_putstr_fd("Usage: ./pipex infile \"cmd1\" \"cmd2\" outfile\n", 2);
-		return (1);
-	}
-	pipex.input_file = argv[1];
-	pipex.output_file = argv[argc - 1];
-	if (validate_files(pipex.input_file, pipex.output_file) < 0)
-		return (1);
-	if (argc == 5)
-		execute_pipex(&pipex, argv, env);
-	return (0);
+	while (*s1 && ft_strchr(set, *s1))
+		s1++;
+	i = ft_strlen(s1);
+	while (i && ft_strchr(set, s1[i - 1]))
+		i--;
+	dest = ft_calloc(i + 1, sizeof(char));
+	if (!dest)
+		return (NULL);
+	ft_strlcpy(dest, s1, i + 1);
+	return (dest);
 }

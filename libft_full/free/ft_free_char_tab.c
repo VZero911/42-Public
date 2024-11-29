@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   ft_free_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/29 03:06:09 by jdumay           ###   ########.fr       */
+/*   Created: 2024/11/08 09:08:27 by jdumay            #+#    #+#             */
+/*   Updated: 2024/11/29 00:56:11 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../libft.h"
 
-int	main(int argc, char **argv, char **env)
+void	ft_free_char_tab(char **split)
 {
-	t_pipex	pipex;
+	int	i;
 
-	if (argc != 5)
+	if (!split)
+		return ;
+	i = 0;
+	while (split[i])
 	{
-		ft_putstr_fd("Usage: ./pipex infile \"cmd1\" \"cmd2\" outfile\n", 2);
-		return (1);
+		free(split[i]);
+		i++;
 	}
-	pipex.input_file = argv[1];
-	pipex.output_file = argv[argc - 1];
-	if (validate_files(pipex.input_file, pipex.output_file) < 0)
-		return (1);
-	if (argc == 5)
-		execute_pipex(&pipex, argv, env);
-	return (0);
+	free(split);
 }

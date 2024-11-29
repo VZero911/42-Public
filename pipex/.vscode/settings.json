@@ -2,6 +2,7 @@
     "files.associations": {
         "thread": "c",
         "__locale": "c",
-        "locale": "c"
+        "locale": "c",
+        "cstdio": "cpp"
     }
 }

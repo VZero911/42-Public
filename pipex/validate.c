@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/29 03:06:09 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/29 01:11:55 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **env)
+int	validate_files(char *input_file, char *output_file)
 {
-	t_pipex	pipex;
+	int	input_fd;
+	int	output_fd;
 
-	if (argc != 5)
+	input_fd = open(input_file, O_RDONLY);
+	if (input_fd < 0)
 	{
-		ft_putstr_fd("Usage: ./pipex infile \"cmd1\" \"cmd2\" outfile\n", 2);
-		return (1);
+		perror("Error opening input file");
+		return (-1);
 	}
-	pipex.input_file = argv[1];
-	pipex.output_file = argv[argc - 1];
-	if (validate_files(pipex.input_file, pipex.output_file) < 0)
-		return (1);
-	if (argc == 5)
-		execute_pipex(&pipex, argv, env);
+	close(input_fd);
+	output_fd = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+	if (output_fd < 0)
+	{
+		perror("Error opening/creating output file");
+		return (-1);
+	}
+	close(output_fd);
 	return (0);
 }

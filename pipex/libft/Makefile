@@ -21,7 +21,6 @@ SRC      := alpha/ft_isalpha.c \
 			 mem/ft_memset.c \
 			 mem/ft_memchr.c \
 			 mem/ft_memcmp.c \
-			 free/ft_free_char_tab.c \
 			 str/ft_strlen.c \
 			 str/ft_strlcpy.c \
 			 str/ft_strlcat.c \
@@ -44,6 +43,7 @@ SRC      := alpha/ft_isalpha.c \
 			 printf/ft_printf_hex.c \
 			 gnl/get_next_line.c \
 			 gnl/get_next_line_utils.c \
+			 free/ft_free_char_tab.c \
 
 BONUS	:= lst/ft_lstnew_bonus.c \
 	   	lst/ft_lstadd_front_bonus.c \
@@ -61,21 +61,21 @@ RM		    := rm -f
 BONUSOBJ	:= $(BONUS:.c=.o)
 
 %.o:		%.c
-			$(CC) $(CFLAGS) -c $< -o $@
+			@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):	$(OBJ)
-			$(AR) $(ARFLAGS) $(NAME) $(OBJ)
+			@$(AR) $(ARFLAGS) $(NAME) $(OBJ)
 
 bonus:		$(OBJ) $(BONUSOBJ)
-			$(AR) $(ARFLAGS) $(NAME) $(OBJ) $(BONUSOBJ)
+			@$(AR) $(ARFLAGS) $(NAME) $(OBJ) $(BONUSOBJ)
 
 all:		$(NAME)
 
 clean:
-			$(RM) $(OBJ) $(BONUSOBJ)
+			@$(RM) $(OBJ) $(BONUSOBJ)
 
 fclean:		clean
-			$(RM) $(NAME)
+			@$(RM) $(NAME)
 
 re:			fclean all
 
