@@ -123,7 +123,7 @@ void	multiples_pipes(t_pipex *pipex, char **argv, char **envp)
 	}
 	close_all_pipes(pipex);
 	i = -1;
-    	while (++i <= pipex->pipe_count)
-    		waitpid(pipex->pid[i], NULL, 0);
+	while (++i <= pipex->pipe_count)
+		waitpid(pipex->pid[i], NULL, 0);
 	cleanup_pipex(pipex);
 }

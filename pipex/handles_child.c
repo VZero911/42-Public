@@ -20,7 +20,7 @@ void	handle_first_child(t_pipex *pipex)
 		cleanup_pipex(pipex);
 		exit(1);
 	}
-	if (dup2(pipex->pipes[0][1], STDOUT_FILENO) < 0)
+	if (dup2(pipex->pipes[0][WRITE], STDOUT_FILENO) < 0)
 	{
 		perror("dup2 output error for first child");
 		cleanup_pipex(pipex);
@@ -30,7 +30,7 @@ void	handle_first_child(t_pipex *pipex)
 
 void	handle_last_child(t_pipex *pipex)
 {
-	if (dup2(pipex->pipes[pipex->pipe_count - 1][0], STDIN_FILENO) < 0)
+	if (dup2(pipex->pipes[pipex->pipe_count - 1][READ], STDIN_FILENO) < 0)
 	{
 		perror("dup2 input error for last child");
 		cleanup_pipex(pipex);
@@ -45,15 +45,15 @@ void	handle_last_child(t_pipex *pipex)
 }
 void	handle_intermediate_child(t_pipex *pipex, int i)
 {
-	if (dup2(pipex->pipes[i - 1][0], STDIN_FILENO) < 0)
+	if (dup2(pipex->pipes[i - 1][READ], STDIN_FILENO) < 0)
 	{
-		perror("dup2 input error for first child");
+		perror("dup2 input error for intermediate child");
 		cleanup_pipex(pipex);
 		exit(1);
 	}
-	if (dup2(pipex->pipes[i][1], STDOUT_FILENO) < 0)
+	if (dup2(pipex->pipes[i][WRITE], STDOUT_FILENO) < 0)
 	{
-		perror("dup2 input error for first child");
+		perror("dup2 output error for intermediate child");
 		cleanup_pipex(pipex);
 		exit(1);
 	}
