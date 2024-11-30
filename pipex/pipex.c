@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/30 04:31:18 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/30 04:56:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,12 @@ int	main(int argc, char **argv, char **envp)
 	pipex.input_file = argv[1];
 	if (validate_files(pipex.input_file, pipex.output_file) < 0)
 		return (1);
+	open_file(&pipex);
 	if (argc == 5)
-	{
-		open_file(&pipex);
 		execute_pipex(&pipex, argv, envp);
-	}
 	else
 	{
 		pipex.pipe_count = argc - 4;
-		open_file(&pipex);
 		multiples_pipes(&pipex, argv, envp);
 	}
 	return (0);
