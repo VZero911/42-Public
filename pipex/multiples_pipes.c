@@ -12,17 +12,17 @@
 
 #include "pipex.h"
 
-void cleanup_pipex(t_pipex *pipex)
+void	cleanup_pipex(t_pipex *pipex)
 {
 	if (!pipex)
 		return ;
-    if (pipex->pipes)
+	if (pipex->pipes)
 	{
-        ft_free_int_tab(pipex->pipes, pipex->pipe_count);
+		ft_free_int_tab(pipex->pipes, pipex->pipe_count);
 	}
-    if (pipex->pid)
+	if (pipex->pid)
 	{
-        free(pipex->pid);
+		free(pipex->pid);
 	}
 	if (pipex->input_fd != -1)
 	{
@@ -38,7 +38,7 @@ void cleanup_pipex(t_pipex *pipex)
 
 void	close_all_pipes(t_pipex *pipex)
 {
-    int	i;
+	int	i;
 
 	if (!pipex || !pipex->pipes)
 		return ;

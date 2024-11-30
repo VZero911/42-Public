@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/30 03:55:12 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/30 04:46:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ t_pipex	*open_file(t_pipex *pipex)
 		perror("Error opening input file");
 		exit(1);
 	}
-	pipex->output_fd = open(pipex->output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	pipex->output_fd
+		= open(pipex->output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (pipex->output_fd < 0)
 	{
 		perror("Error opening output file");

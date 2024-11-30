@@ -43,6 +43,7 @@ void	handle_last_child(t_pipex *pipex)
 		exit(1);
 	}
 }
+
 void	handle_intermediate_child(t_pipex *pipex, int i)
 {
 	if (dup2(pipex->pipes[i - 1][READ], STDIN_FILENO) < 0)
@@ -62,10 +63,10 @@ void	handle_intermediate_child(t_pipex *pipex, int i)
 void	handles_child(t_pipex *pipex, char **argv, char **envp, int i)
 {
 	if (i == 0)
-        handle_first_child(pipex);
-    else if (i == pipex->pipe_count)
-        handle_last_child(pipex);
-    else
+		handle_first_child(pipex);
+	else if (i == pipex->pipe_count)
+		handle_last_child(pipex);
+	else
 		handle_intermediate_child(pipex, i);
 	close_all_pipes(pipex);
 	pipex->cmd_args = parse_command(argv[2 + i]);

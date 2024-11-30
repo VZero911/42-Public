@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:13:14 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/30 03:55:24 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/30 04:49:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@
 
 typedef struct s_pipex
 {
-    pid_t	*pid;
-    int     pipe_count;
+	pid_t	*pid;
+	int		pipe_count;
 	int		**pipes;
 	char	*input_file;
 	char	*output_file;
-	char	*cmd_paths;
+	char	**cmd_paths;
 	char	**cmd_args;
 	int		pipe_fd[2];
 	int		input_fd;
