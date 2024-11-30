@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:13:14 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/29 02:22:58 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/30 02:06:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,10 @@ typedef struct s_pipex
 	pid_t	pid2;
 }	t_pipex;
 
-int		validate_files(char *input_file, char *output_file);
 void	execute_pipex(t_pipex *pipex, char **argv, char **envp);
 
+int		validate_files(char *input_file, char *output_file);
 char	**parse_command(char *cmd);
-int		open_file(char *file, int flags, mode_t mode);
-void	dup_and_close(int old_fd, int new_fd);
 char	*find_command_path(char *cmd, char **envp);
 void	free_if_execve_fail(char **cmd_args, char *cmd_path);
 
