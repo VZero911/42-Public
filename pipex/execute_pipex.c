@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/30 04:33:13 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/30 05:01:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,15 @@ void	execute_cmd1(t_pipex *pipex, char **argv, char **envp)
 	if (!pipex->cmd_args)
 	{
 		perror("Malloc Error");
+		cleanup_pipex(pipex);
 		exit(1);
 	}
 	pipex->cmd_paths = find_command_path(pipex->cmd_args[0], envp);
 	if (!pipex->cmd_paths)
 	{
-		ft_free_char_tab(pipex->cmd_args);
+		cleanup_pipex(pipex);
 		perror("Command not found");
-		exit(1);
+		exit(127);
 	}
 	if (execve(pipex->cmd_paths, pipex->cmd_args, envp) == -1)
 		free_if_execve_fail(pipex->cmd_args, pipex->cmd_paths);
@@ -46,15 +47,16 @@ void	execute_cmd2(t_pipex *pipex, char **argv, char **envp)
 	pipex->cmd_args = parse_command(argv[3]);
 	if (!pipex->cmd_args)
 	{
+		cleanup_pipex(pipex);
 		perror("Malloc Error");
 		exit(1);
 	}
 	pipex->cmd_paths = find_command_path(pipex->cmd_args[0], envp);
 	if (!pipex->cmd_paths)
 	{
-		ft_free_char_tab(pipex->cmd_args);
+		cleanup_pipex(pipex);
 		perror("Command not found");
-		exit(1);
+		exit(127);
 	}
 	if (execve(pipex->cmd_paths, pipex->cmd_args, envp) == -1)
 		free_if_execve_fail(pipex->cmd_args, pipex->cmd_paths);

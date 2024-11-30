@@ -73,17 +73,17 @@ void	handles_child(t_pipex *pipex, char **argv, char **envp, int i)
 	if (!pipex->cmd_args)
 	{
 		perror("Malloc Error");
+		cleanup_pipex(pipex);
 		exit(1);
 	}
 	pipex->cmd_paths = find_command_path(pipex->cmd_args[0], envp);
 	if (!pipex->cmd_paths)
 	{
-		ft_free_char_tab(pipex->cmd_args);
 		perror("Command not found");
+		cleanup_pipex(pipex);
 		exit(127);
 	}
 	cleanup_pipex(pipex);
-	execve(pipex->cmd_paths, pipex->cmd_args, envp);
-	perror("Execve error");
-	exit(1);
+	if (execve(pipex->cmd_paths, pipex->cmd_args, envp) < 0)
+		return (free_if_execve_fail(pipex->cmd_args, pipex->cmd_paths));
 }
