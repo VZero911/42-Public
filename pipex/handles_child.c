@@ -70,6 +70,11 @@ void	handles_child(t_pipex *pipex, char **argv, char **envp, int i)
 		handle_intermediate_child(pipex, i);
 	close_all_pipes(pipex);
 	pipex->cmd_args = parse_command(argv[2 + i]);
+	if (!pipex->cmd_args)
+	{
+		perror("Malloc Error");
+		exit(1);
+	}
 	pipex->cmd_paths = find_command_path(pipex->cmd_args[0], envp);
 	if (!pipex->cmd_paths)
 	{
