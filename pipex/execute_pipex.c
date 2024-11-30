@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/29 02:12:28 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/11/30 03:39:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	execute_cmd1(t_pipex *pipex, char **argv, char **envp)
 {
-	char	**cmd_args;
-	char	*cmd_path;
-
 	pipex->input_fd = open(pipex->input_file, O_RDONLY);
 	if (pipex->input_fd < 0)
 	{
@@ -28,23 +25,20 @@ void	execute_cmd1(t_pipex *pipex, char **argv, char **envp)
 	dup2(pipex->pipe_fd[WRITE], STDOUT_FILENO);
 	close(pipex->pipe_fd[READ]);
 	close(pipex->pipe_fd[WRITE]);
-	cmd_args = parse_command(argv[2]);
-	cmd_path = find_command_path(cmd_args[0], envp);
-	if (!cmd_path)
+	pipex->cmd_args = parse_command(argv[2]);
+	pipex->cmd_paths = find_command_path(pipex->cmd_args[0], envp);
+	if (!pipex->cmd_paths)
 	{
-		ft_free_char_tab(cmd_args);
+		ft_free_char_tab(pipex->cmd_args);
 		perror("Command not found");
 		exit(1);
 	}
-	if (execve(cmd_path, cmd_args, envp) == -1)
-		free_if_execve_fail(cmd_args, cmd_path);
+	if (execve(pipex->cmd_paths, pipex->cmd_args, envp) == -1)
+		free_if_execve_fail(pipex->cmd_args, pipex->cmd_paths);
 }
 
 void	execute_cmd2(t_pipex *pipex, char **argv, char **envp)
 {
-	char	**cmd_args;
-	char	*cmd_path;
-
 	pipex->output_fd
 		= open(pipex->output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if (pipex->output_fd < 0)
@@ -57,16 +51,16 @@ void	execute_cmd2(t_pipex *pipex, char **argv, char **envp)
 	close(pipex->pipe_fd[READ]);
 	dup2(pipex->output_fd, STDOUT_FILENO);
 	close(pipex->output_fd);
-	cmd_args = parse_command(argv[3]);
-	cmd_path = find_command_path(cmd_args[0], envp);
-	if (!cmd_path)
+	pipex->cmd_args = parse_command(argv[3]);
+	pipex->cmd_paths = find_command_path(pipex->cmd_args[0], envp);
+	if (!pipex->cmd_paths)
 	{
-		ft_free_char_tab(cmd_args);
+		ft_free_char_tab(pipex->cmd_args);
 		perror("Command not found");
 		exit(1);
 	}
-	if (execve(cmd_path, cmd_args, envp) == -1)
-		free_if_execve_fail(cmd_args, cmd_path);
+	if (execve(pipex->cmd_paths, pipex->cmd_args, envp) == -1)
+		free_if_execve_fail(pipex->cmd_args, pipex->cmd_paths);
 }
 
 void	execute_pipex(t_pipex *pipex, char **argv, char **envp)

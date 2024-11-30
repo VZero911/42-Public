@@ -44,6 +44,7 @@ SRC      := alpha/ft_isalpha.c \
 			 gnl/get_next_line.c \
 			 gnl/get_next_line_utils.c \
 			 free/ft_free_char_tab.c \
+			 free/ft_free_int_tab.c \
 
 BONUS	:= lst/ft_lstnew_bonus.c \
 	   	lst/ft_lstadd_front_bonus.c \

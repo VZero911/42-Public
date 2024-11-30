@@ -1,1 +1,17 @@
-2436
+total 80
+-rwxrwxrwx 1 salieri salieri  1191 Nov 30 03:33 Makefile
+-rwxrwxrwx 1 salieri salieri  2905 Nov 30 03:39 execute_pipex.c
+-rwxrwxrwx 1 salieri salieri  4400 Nov 30 03:39 execute_pipex.o
+-rwxrwxrwx 1 salieri salieri  2575 Nov 30 04:24 handles_child.c
+-rwxrwxrwx 1 salieri salieri  4072 Nov 30 04:24 handles_child.o
+-rwxrwxrwx 1 salieri salieri   147 Nov 30 03:43 infile
+drwxrwxrwx 1 salieri salieri   512 Nov 30 02:41 libft
+-rwxrwxrwx 1 salieri salieri  3078 Nov 30 04:09 multiples_pipes.c
+-rwxrwxrwx 1 salieri salieri  4240 Nov 30 04:09 multiples_pipes.o
+-rwxrwxrwx 1 salieri salieri     0 Nov 30 04:24 outfile
+-rwxrwxrwx 1 salieri salieri 22536 Nov 30 04:24 pipex
+-rwxrwxrwx 1 salieri salieri  1517 Nov 30 03:55 pipex.c
+-rwxrwxrwx 1 salieri salieri  1869 Nov 30 03:55 pipex.h
+-rwxrwxrwx 1 salieri salieri  2272 Nov 30 03:55 pipex.o
+-rwxrwxrwx 1 salieri salieri  2433 Nov 30 03:55 validate.c
+-rwxrwxrwx 1 salieri salieri  3784 Nov 30 03:55 validate.o

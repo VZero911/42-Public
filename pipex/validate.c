@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/30 02:05:34 by marvin           ###   ########.fr       */
+/*   Updated: 2024/11/30 03:55:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,24 @@ char	*find_command_path(char *cmd, char **envp)
 	}
 	ft_free_char_tab(paths);
 	return (NULL);
+}
+
+t_pipex	*open_file(t_pipex *pipex)
+{
+	pipex->input_fd = open(pipex->input_file, O_RDONLY);
+	if (pipex->input_fd < 0)
+	{
+		perror("Error opening input file");
+		exit(1);
+	}
+	pipex->output_fd = open(pipex->output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (pipex->output_fd < 0)
+	{
+		perror("Error opening output file");
+		close(pipex->input_fd);
+		exit(1);
+	}
+	return (pipex);
 }
 
 int	validate_files(char *input_file, char *output_file)

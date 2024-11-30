@@ -141,5 +141,6 @@ char	*ft_strdup_gnl(const char *s);
 char	*free_and_return(char **ptr);
 
 void	ft_free_char_tab(char **split);
+void	ft_free_int_tab(int **tab, int size);
 
 #endif
