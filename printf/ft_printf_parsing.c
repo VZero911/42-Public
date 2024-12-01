@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 20:24:11 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/01 18:46:41 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,12 @@ void	ft_get_data(const char **str, va_list *args, t_struct *data)
 	char	*current;
 
 	current = (char *)(*str) + 1;
-	data->type = ft_get_specifier(*current);
+	check_for_flags(&current, data);
 	if (ft_strchr(SPECIFIER, *current) && *current)
 	{
-		data->var = ft_get_var(data, args);
+		data->type = ft_get_specifier(*current);
+		if (args)
+			data->var = ft_get_var(data, args);
 		*str = current;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/30 20:20:54 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/01 22:21:23 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 # include <stdarg.h>
 
 # define SPECIFIER	"cspdiuxX%"
+# define FLAGS	"-0# +"
+# define FLAG_LEFT_ALIGN    (1 << 0)
+# define FLAG_ZERO_PADDING  (1 << 1)
+# define FLAG_HASH          (1 << 2)
+# define FLAG_SPACE         (1 << 3)
+# define FLAG_PLUS          (1 << 4)
+
 
 typedef enum e_type
 {
@@ -46,6 +53,9 @@ typedef struct s_data
 	t_type	type;
 	t_var	var;
 	int		len;
+	int		flags;
+	int		width;
+	int		precision;
 }	t_struct;
 
 int		ft_printf(const char *str, ...);
@@ -67,13 +77,19 @@ void	ft_printf_hex_low(t_struct *data);
 void	ft_printf_hex_up(t_struct *data);
 
 void	ft_data_len(t_struct *data, int len);
-int		ft_pointer_fd(unsigned long long ptr, char *base);
 int		ft_putnum_fd(int nb, int fd);
 int		ft_putunum_fd(unsigned int nb, int fd);
 
 int		ft_putnbr_hex_low(unsigned int nb);
 int		ft_putnbr_hex_up(unsigned int nb);
 
-int		main(int argc, char **argv);
+void	check_for_flags(char **current, t_struct *data);
+
+void	apply_padding(char pad_char, int len);
+char	*handle_precision_and_strdup(char *str, t_struct *data);
+void	print_and_pad(char *print_str, int padlen, char padding, t_struct *data);
+char    padding_char(t_struct *data);
+
+char	*ft_pointer_to_str(unsigned long long ptr, const char *base);
 
 #endif

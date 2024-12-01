@@ -7,14 +7,13 @@ SRC	:= ft_printf.c \
 		ft_printf_type.c \
 		ft_printf_type2.c \
 		ft_printf_utils.c \
-		ft_printf_hex.c
+		ft_printf_hex.c \
+		check_for_flags.c \
+		apply_flags.c \
+		ft_pointer_to_str.c \
 
 OBJ      := $(SRC:.c=.o)
 ARFLAGS   := rcs
-
-MAIN	:= main.c
-MAIN_NAME	:= printf_exec
-MAIN_OBJ	:=$(MAIN:.c = .o)
 
 %.o:            %.c
 		$(CC) $(CFLAGS) -c $< -o $@
@@ -23,25 +22,19 @@ $(NAME):        $(OBJ) $(LIB)
 		cp $(LIB) $(NAME)
 		ar $(ARFLAGS) $(NAME) $(OBJ)
 $(LIB):
-		$(MAKE) -C $$(dirname $(LIB))
+		$(MAKE) -C libft
 
-main:		$(MAIN_OBJ) $(NAME)
-		$(CC) $(CFLAGS) -o $(MAIN_NAME) $(MAIN_OBJ) $(NAME)
-
-all:            $(NAME)
+all:		$(NAME)
 
 clean:
-		$(MAKE) clean -C $$(dirname $(LIB))
+		$(MAKE) clean -C libft
 		rm -f $(OBJ)
 
 fclean:         clean
 		rm -f $(NAME)
 		rm -f $(LIB)
 
-mainfclean:	fclean
-		rm -f $(MAIN_NAME)
-
-mainre:		mainfclean main
+bonus:		$(NAME)
 
 re:                     fclean all
 
