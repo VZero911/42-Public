@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/01 22:21:23 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/02 00:04:49 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int		ft_printf(const char *str, ...);
 int		ft_printf_parsing(const char *str, va_list *args);
 void	ft_get_data(const char **str, va_list *args, t_struct *data);
 void	ft_printf_data(t_struct *data);
-t_type	ft_get_type(char c);
+t_type	ft_get_specifier(char c);
 t_var	ft_get_var(t_struct *data, va_list *args);
 
 void	ft_printf_char(t_struct *data);
