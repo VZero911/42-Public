@@ -23,6 +23,7 @@ void	cleanup_pipex(t_pipex *pipex)
 	if (pipex->pid)
 	{
 		free(pipex->pid);
+		pipex->pid = NULL;
 	}
 	if (pipex->input_fd != -1)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/20 00:03:03 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/02 17:22:51 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,31 +75,31 @@ void	replace_stack(t_stack **stack)
 	(*stack) = stack_a;
 }
 
-void	sort_three(t_stack **stack_a)
+void sort_three(t_stack **stack_a)
 {
-	int	fst;
-	int	scd;
-	int	trd;
+    int fst;
+    int scd;
+    int trd;
 
-	fst = (*stack_a)->value;
-	scd = (*stack_a)->next->value;
-	trd = (*stack_a)->prev->value;
-	if (stack_sorted((*stack_a)))
-		return ;
-	if ((fst < scd) && (scd > trd) && (fst < trd))
-	{
-		rra(stack_a, 1);
-		sa(stack_a, 1);
-	}
-	else if ((fst < scd) && (scd > trd) && (fst > trd))
-		rra(stack_a, 1);
-	else if ((fst > scd) && (scd < trd) && (fst > trd))
-		ra(stack_a, 1);
-	else if ((fst > scd) && (scd > trd))
-	{
-		sa(stack_a, 1);
-		ra(stack_a, 1);
-	}
-	else
-		sa(stack_a, 1);
+    if (stack_sorted((*stack_a)))
+        return;
+    fst = (*stack_a)->value;
+    scd = (*stack_a)->next->value;
+    trd = (*stack_a)->next->next->value;
+    if ((fst > scd) && (fst < trd))
+        sa(stack_a, 1);
+    else if ((fst > scd) && (scd > trd))
+    {
+        sa(stack_a, 1);
+        rra(stack_a, 1);
+    }
+    else if ((fst > trd) && (scd < trd))
+        ra(stack_a, 1);
+    else if ((fst < trd) && (scd > trd))
+    {
+        sa(stack_a, 1);
+        ra(stack_a, 1);
+    }
+    else if ((fst > trd) && (scd > trd))
+        rra(stack_a, 1);
 }
