@@ -114,6 +114,7 @@ void	waitpid_all(t_pipex *pipex)
 	{
 		waitpid(pipex->pid[i], &status, 0);
 	}
+	free(pipex->heredoc_pipe);
 	cleanup_pipex(pipex);
 	if (WIFEXITED(status))
 		exit(WEXITSTATUS(status));
@@ -149,7 +150,6 @@ void	handle_heredoc(t_pipex *pipex, int argc, char **argv, char **envp)
 		pipex->pid[i] = fork();
 		if (pipex->pid[i] == -1)
 			exit(1);
-		
 		if (pipex->pid[i] == 0)
 		{
 			if (i == 0)
