@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validate.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/30 04:46:43 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/02 14:22:15 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,43 +54,46 @@ char	*find_command_path(char *cmd, char **envp)
 	return (NULL);
 }
 
-t_pipex	*open_file(t_pipex *pipex)
+t_pipex	*open_file(t_pipex *pipex, bool fd)
 {
 	pipex->input_fd = open(pipex->input_file, O_RDONLY);
-	if (pipex->input_fd < 0)
+	if (pipex->input_fd < 0 && fd == true)
 	{
+		close_all_pipes(pipex);
+		cleanup_pipex(pipex);
 		perror("Error opening input file");
 		exit(1);
 	}
 	pipex->output_fd
 		= open(pipex->output_file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (pipex->output_fd < 0)
+	if (pipex->output_fd < 0 && fd == false)
 	{
+		close_all_pipes(pipex);
+		cleanup_pipex(pipex);
 		perror("Error opening output file");
-		close(pipex->input_fd);
 		exit(1);
 	}
 	return (pipex);
 }
 
-int	validate_files(char *input_file, char *output_file)
-{
-	int	input_fd;
-	int	output_fd;
+// int	validate_files(char *input_file, char *output_file)
+// {
+// 	int	input_fd;
+// 	int	output_fd;
 
-	input_fd = open(input_file, O_RDONLY);
-	if (input_fd < 0)
-	{
-		perror("Error opening input file");
-		return (-1);
-	}
-	close(input_fd);
-	output_fd = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	if (output_fd < 0)
-	{
-		perror("Error opening/creating output file");
-		return (-1);
-	}
-	close(output_fd);
-	return (0);
-}
+// 	input_fd = open(input_file, O_RDONLY);
+// 	if (input_fd < 0)
+// 	{
+// 		perror("Error opening input file");
+// 		return (-1);
+// 	}
+// 	close(input_fd);
+// 	output_fd = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
+// 	if (output_fd < 0)
+// 	{
+// 		perror("Error opening/creating output file");
+// 		return (-1);
+// 	}
+// 	close(output_fd);
+// 	return (0);
+// }

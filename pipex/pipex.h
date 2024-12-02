@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:13:14 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/30 04:53:16 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/02 14:18:48 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ typedef struct s_pipex
 	pid_t	pid2;
 }	t_pipex;
 
-void	execute_pipex(t_pipex *pipex, char **argv, char **envp);
+// void	execute_pipex(t_pipex *pipex, char **argv, char **envp);
 void	multiples_pipes(t_pipex *pipex, char **argv, char **envp);
 void	cleanup_pipex(t_pipex *pipex);
 void	handles_child(t_pipex *pipex, char **argv, char **envp, int i);
 void	close_all_pipes(t_pipex *pipex);
 
-int		validate_files(char *input_file, char *output_file);
+// int		validate_files(char *input_file, char *output_file);
 char	**parse_command(char *cmd);
 char	*find_command_path(char *cmd, char **envp);
 void	free_if_execve_fail(char **cmd_args, char *cmd_path);
-t_pipex	*open_file(t_pipex *pipex);
+t_pipex	*open_file(t_pipex *pipex, bool fd);
 
 #endif

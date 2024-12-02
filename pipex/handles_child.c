@@ -14,6 +14,12 @@
 
 void	handle_first_child(t_pipex *pipex)
 {
+	open_file(pipex, true);
+	if (pipex->input_fd < 0)
+	{
+		perror("Error opening input file");
+		exit(1);
+	}
 	if (dup2(pipex->input_fd, STDIN_FILENO) < 0)
 	{
 		perror("dup2 input error for first child");
@@ -30,6 +36,12 @@ void	handle_first_child(t_pipex *pipex)
 
 void	handle_last_child(t_pipex *pipex)
 {
+	open_file(pipex, false);
+	if (pipex->output_fd < 0)
+	{
+		perror("Error opening input file");
+		exit(1);
+	}
 	if (dup2(pipex->pipes[pipex->pipe_count - 1][READ], STDIN_FILENO) < 0)
 	{
 		perror("dup2 input error for last child");
