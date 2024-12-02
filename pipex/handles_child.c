@@ -79,6 +79,7 @@ void	handles_child(t_pipex *pipex, char **argv, char **envp, int i)
 	pipex->cmd_paths = find_command_path(pipex->cmd_args[0], envp);
 	if (!pipex->cmd_paths)
 	{
+		ft_free_char_tab(pipex->cmd_args);
 		perror("Command not found");
 		cleanup_pipex(pipex);
 		exit(127);

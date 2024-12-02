@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/30 04:56:01 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/02 11:17:56 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,7 @@ int	main(int argc, char **argv, char **envp)
 	if (validate_files(pipex.input_file, pipex.output_file) < 0)
 		return (1);
 	open_file(&pipex);
-	if (argc == 5)
-		execute_pipex(&pipex, argv, envp);
-	else
-	{
-		pipex.pipe_count = argc - 4;
-		multiples_pipes(&pipex, argv, envp);
-	}
+	pipex.pipe_count = argc - 4;
+	multiples_pipes(&pipex, argv, envp);
 	return (0);
 }
