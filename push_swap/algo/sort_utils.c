@@ -84,6 +84,8 @@ void	sort_three(t_stack **stack_a)
 	fst = (*stack_a)->value;
 	scd = (*stack_a)->next->value;
 	trd = (*stack_a)->prev->value;
+	if (stack_sorted((*stack_a)))
+		return ;
 	if ((fst < scd) && (scd > trd) && (fst < trd))
 	{
 		rra(stack_a, 1);

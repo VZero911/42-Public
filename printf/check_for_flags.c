@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/01 22:12:59 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/02 10:09:34 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	check_for_width(char **current, t_struct *data)
 		}
 	}
 }
-
 
 void	check_for_flags(char **current, t_struct *data)
 {
