@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/02 17:13:25 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/03 00:26:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,11 @@ int	main(int argc, char **argv, char **envp)
 	pipex.output_fd = -1;
 	pipex.pipes = NULL;
 	pipex.pid = NULL;
-	// if (!ft_strncmp(pipex.input_file, "here_doc", 9))
-		// handle_heredoc();
+	if (!ft_strncmp(pipex.input_file, "here_doc", 9))
+	{
+		pipex.pipe_count = 1;
+		handle_heredoc(&pipex, argc, argv, envp);
+	}
 	multiples_pipes(&pipex, argv, envp);
 	return (0);
 }

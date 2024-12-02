@@ -8,7 +8,7 @@ NAME      := pipex
 CFLAGS     := -Wall -Wextra -Werror 
 LIB	:= libft/libft.a
 
-SRC	:=	pipex.c validate.c multiples_pipes.c handles_child.c \
+SRC	:=	pipex.c validate.c multiples_pipes.c handles_child.c handle_heredoc.c \
 
 OBJ      := $(SRC:.c=.o)
 
