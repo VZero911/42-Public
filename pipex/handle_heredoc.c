@@ -63,6 +63,7 @@ static void	write_heredoc_input(char *limiter)
 	}
 	close(tmp_fd);
 }
+
 void	execute_cmd(char *cmd_str, char **envp)
 {
 	char	**cmd_args;
@@ -109,13 +110,13 @@ void	waitpid_all(t_pipex *pipex)
 	int	status;
 	int	i;
 
-	close_all_pipes(pipex);
-	for (i = 0; i < pipex->pipe_count + 1; i++)
+	i = -1;
+	while (++i < pipex->pipe_count + 1)
 	{
 		waitpid(pipex->pid[i], &status, 0);
 	}
-	free(pipex->heredoc_pipe);
 	cleanup_pipex(pipex);
+	free_heredoc_resources(pipex);
 	if (WIFEXITED(status))
 		exit(WEXITSTATUS(status));
 	else if (WIFSIGNALED(status))
@@ -155,15 +156,17 @@ void	handle_heredoc(t_pipex *pipex, int argc, char **argv, char **envp)
 			if (i == 0)
 			{
 				dup2(pipex->input_fd, STDIN_FILENO);
-				dup2(pipex->heredoc_pipe[1], STDOUT_FILENO);
+				dup2(pipex->heredoc_pipe[WRITE], STDOUT_FILENO);
 				close_pipes(pipex);
+				free_heredoc_resources(pipex);
 				execute_cmd(argv[3], envp);
 			}
 			else if (i == 1)
 			{
-				dup2(pipex->heredoc_pipe[0], STDIN_FILENO);
+				dup2(pipex->heredoc_pipe[READ], STDIN_FILENO);
 				dup2(pipex->output_fd, STDOUT_FILENO);
 				close_pipes(pipex);
+				free_heredoc_resources(pipex);
 				if (argc == 5)
 					execute_cmd(argv[4 - 1], envp);
 				else
