@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:13:14 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/03 00:45:03 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/03 18:14:19 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,6 @@ char	**parse_command(char *cmd);
 void	close_all_pipes(t_pipex *pipex);
 char	*find_command_path(char *cmd, char **envp);
 void	free_if_execve_fail(char **cmd_args, char *cmd_path);
-t_pipex	*open_file(t_pipex *pipex, bool fd);
+t_pipex	*open_file(t_pipex *pipex, bool is_input);
 
 #endif
