@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_parsing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/01 18:46:41 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/04 21:08:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-t_type	ft_get_specifier(char c)
+static t_type	ft_get_specifier(char c)
 {
 	if (c == 'c')
 		return (SPECIFIER_CHAR);
@@ -33,7 +33,7 @@ t_type	ft_get_specifier(char c)
 	return (SPECIFIER_NONE);
 }
 
-t_var	ft_get_var(t_struct *data, va_list *args)
+static t_var	ft_get_var(t_struct *data, va_list *args)
 {
 	t_var	var;
 
@@ -53,7 +53,7 @@ t_var	ft_get_var(t_struct *data, va_list *args)
 	return (var);
 }
 
-void	ft_get_data(const char **str, va_list *args, t_struct *data)
+static void	ft_get_data(const char **str, va_list *args, t_struct *data)
 {
 	char	*current;
 
@@ -68,7 +68,7 @@ void	ft_get_data(const char **str, va_list *args, t_struct *data)
 	}
 }
 
-void	ft_printf_data(t_struct *data)
+static void	ft_printf_data(t_struct *data)
 {
 	if (data->type == SPECIFIER_CHAR)
 		ft_printf_char(data);

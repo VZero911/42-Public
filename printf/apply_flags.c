@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 20:56:03 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/04 22:15:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,29 @@ void	apply_padding(char pad_char, int len)
 void	ft_data_len(t_struct *data, int len)
 {
 	data->len += len;
+}
+
+
+char *apply_int_precision(char *nb_str, t_struct *data)
+{
+	int		precision_len;
+	int		nb_len;
+	char	*precision_str;
+
+	if (data->precision == -1)
+		return (nb_str);
+	nb_len = ft_strlen(nb_str);
+	precision_len = data->precision - nb_len;
+	if (precision_len <= 0)
+		return (nb_str);
+	precision_str = ft_calloc(data->precision + 1, sizeof(char));
+	if (!precision_str)
+	{
+		free(nb_str);
+		return (NULL);
+	}
+	ft_memset(precision_str, '0', precision_len);
+	ft_memcpy(precision_str + precision_len, nb_str, nb_len);
+	free(nb_str);
+	return (precision_str);
 }

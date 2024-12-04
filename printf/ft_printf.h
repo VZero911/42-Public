@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 21:01:38 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/04 21:44:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,22 +65,18 @@ typedef unsigned long long t_ull;
 int		ft_printf(const char *str, ...);
 
 int		ft_printf_parsing(const char *str, va_list *args);
-void	ft_get_data(const char **str, va_list *args, t_struct *data);
-void	ft_printf_data(t_struct *data);
-t_type	ft_get_specifier(char c);
-t_var	ft_get_var(t_struct *data, va_list *args);
 
 void	ft_printf_char(t_struct *data);
 void	ft_printf_string(t_struct *data);
 void	ft_printf_percentage(t_struct *data);
 void	ft_printf_pointer(t_struct *data);
-char	*ft_pointer_to_str(t_ull ptr, const char *base);
 void	ft_printf_int(t_struct *data);
 void	ft_printf_uint(t_struct *data);
 void	ft_printf_hex_low(t_struct *data);
 void	ft_printf_hex_up(t_struct *data);
 
-int		ft_putunum_fd(unsigned int nb, int fd);
+char	*apply_int_precision(char *nb_str, t_struct *data);
+char	*ft_ulltoa_base(t_ull n, const char *base);
 int		ft_putnbr_hex_low(unsigned int nb);
 int		ft_putnbr_hex_up(unsigned int nb);
 
@@ -90,6 +86,5 @@ void	ft_data_len(t_struct *data, int len);
 void	apply_padding(char pad_char, int len);
 void	print_and_pad(char *print_str, int padlen, char padding, t_struct *data);
 char    padding_char(t_struct *data);
-
 
 #endif

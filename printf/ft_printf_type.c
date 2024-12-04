@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 01:40:08 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/04 21:06:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,20 @@ void ft_printf_char(t_struct *data)
 		ft_data_len(data, data->width);
 	else
 		ft_data_len(data, 1);
+}
+
+static char	*ft_pointer_to_str(t_ull ptr, const char *base)
+{
+	char	*str;
+	char	*prefix;
+	char	*hex;
+
+	prefix = ft_strdup("0x");
+	hex = ft_ulltoa_base(ptr, base);
+	str = ft_strjoin(prefix, hex);
+	free(prefix);
+	free(hex);
+	return (str);
 }
 
 void	ft_printf_pointer(t_struct *data)

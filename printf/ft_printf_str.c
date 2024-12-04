@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 20:46:47 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/04 22:22:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static size_t	ft_count_digits(t_ull n, int base_len)
 	return (count);
 }
 
-static char	*ft_ulltoa_base(t_ull n, const char *base)
+char	*ft_ulltoa_base(t_ull n, const char *base)
 {
 	char	*result;
 	size_t	base_len;
@@ -47,28 +47,36 @@ static char	*ft_ulltoa_base(t_ull n, const char *base)
 	return (result);
 }
 
-void ft_printf_string(t_struct *data)
+static char *prepare_string(t_struct *data)
 {
     char *str;
+    char *print_str;
+
+    str = data->var.s;
+    if (!str)
+    {
+        if (data->precision == -1 || data->precision >= 6)
+            str = "(null)";
+        else
+            str = "";
+    }
+    if (data->precision != -1 && data->precision < (int)ft_strlen(str))
+        print_str = ft_substr(str, 0, data->precision);
+    else
+        print_str = ft_strdup(str);
+    return (print_str);
+}
+
+void ft_printf_string(t_struct *data)
+{
     char *print_str;
     int strlen;
     int padlen;
     char padding;
 
-    str = data->var.s;
-    if (!str)
-	{
-	    if (data->precision == -1 || data->precision >= 6)
-	        str = "(null)";
-	    else
-	        str = "";
-	}
-	if (data->precision != -1 && data->precision < (int)ft_strlen(str))
-        print_str = ft_substr(str, 0, data->precision);
-    else
-        print_str = ft_strdup(str);
+    print_str = prepare_string(data);
     if (!print_str)
-        return;
+        return ;
     strlen = ft_strlen(print_str);
     if (data->width > strlen)
         padlen = data->width - strlen;
@@ -81,19 +89,4 @@ void ft_printf_string(t_struct *data)
     else
         ft_data_len(data, strlen);
     free(print_str);
-}
-
-
-char	*ft_pointer_to_str(t_ull ptr, const char *base)
-{
-	char	*str;
-	char	*prefix;
-	char	*hex;
-
-	prefix = ft_strdup("0x");
-	hex = ft_ulltoa_base(ptr, base);
-	str = ft_strjoin(prefix, hex);
-	free(prefix);
-	free(hex);
-	return (str);
 }

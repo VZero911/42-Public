@@ -12,50 +12,44 @@
 
 #include "ft_printf.h"
 
-static char	*prepare_int_str(int nb)
+static char *handle_zero_case_and_padding(char *nb_str, int nb, t_struct *data)
+{
+	if (nb == 0 && data->precision == 0)
+	{
+		free(nb_str);
+		nb_str = ft_strdup("");
+		if (!nb_str)
+			return (NULL);
+	}
+	if ((data->flags & FLAG_ZERO_PADDING)
+		&& !(data->flags & FLAG_LEFT_ALIGN) && data->precision == -1)
+	{
+		if (nb < 0)
+			data->precision = data->width - 1;
+		else
+			data->precision = data->width;
+		data->width = 0;
+	}
+	return nb_str;
+}
+
+static char *prepare_int_str(int nb)
 {
 	char	*nb_str;
-	int		is_negative;
 
-	is_negative = (nb < 0);
-	if (is_negative)
+	if (nb < 0)
 		nb_str = ft_itoa(-nb);
 	else
 		nb_str = ft_itoa(nb);
 	if (!nb_str)
 		return (NULL);
-	return (nb_str);
+	return nb_str;
 }
 
-static char	*apply_int_precision(char *nb_str, t_struct *data)
-{
-	char	*precision_str;
-	int		precision_len;
-	int		nb_len;
-
-	if (data->precision == -1)
-		return (nb_str);
-	nb_len = ft_strlen(nb_str);
-	precision_len = data->precision - nb_len;
-	if (precision_len <= 0)
-		return (nb_str);
-	precision_str = ft_calloc(data->precision + 1, sizeof(char));
-	if (!precision_str)
-	{
-		free(nb_str);
-		return (NULL);
-	}
-	ft_memset(precision_str, '0', precision_len);
-	ft_memcpy(precision_str + precision_len, nb_str, nb_len);
-	free(nb_str);
-	return (precision_str);
-}
-
-static char	*add_int_sign(char *nb_str, int nb, t_struct *data)
+static char *add_int_sign(char *nb_str, int nb, t_struct *data)
 {
 	char	sign_char;
 	char	*signed_str;
-
 
 	sign_char = 0;
 	if (nb < 0)
@@ -78,51 +72,44 @@ static char	*add_int_sign(char *nb_str, int nb, t_struct *data)
 	return (signed_str);
 }
 
+static char *prepare_number(int nb, t_struct *data)
+{
+    char *nb_str;
+
+    nb_str = prepare_int_str(nb);
+    if (!nb_str)
+        return (NULL);
+    nb_str = handle_zero_case_and_padding(nb_str, nb, data);
+    if (!nb_str)
+        return (NULL);
+    nb_str = apply_int_precision(nb_str, data);
+    if (!nb_str)
+        return (NULL);
+    nb_str = add_int_sign(nb_str, nb, data);
+    return (nb_str);
+}
+
 void	ft_printf_int(t_struct *data)
 {
 	int		nb;
 	char	*nb_str;
-	int		strlen;
 	int		padlen;
+	int		strlen;
 	char	padding;
 
 	nb = data->var.i;
-	nb_str = prepare_int_str(nb);
-	if (!nb_str)
-		return ;
-	if (nb == 0 && data->precision == 0)
+	nb_str = prepare_number(nb, data);
+    if (!nb_str)
 	{
-	    free(nb_str);
-	    nb_str = ft_strdup("");
-	    if (!nb_str)
-	        return ;
+        return ;
 	}
-	if ((data->flags & FLAG_ZERO_PADDING) &&
-		!(data->flags & FLAG_LEFT_ALIGN) &&
-		data->precision == -1)
-	{
-		if (nb < 0)
-			data->precision = data->width - 1;
-		else
-			data->precision = data->width;
-		data->width = 0;
-	}
-	nb_str = apply_int_precision(nb_str, data);
-	if (!nb_str)
-		return ;
-	nb_str = add_int_sign(nb_str, nb, data);
-	if (!nb_str)
-		return ;
 	strlen = ft_strlen(nb_str);
 	if (data->width > strlen)
 		padlen = data->width - strlen;
-	else
+	else 
 		padlen = 0;
 	padding = padding_char(data);
 	print_and_pad(nb_str, padlen, padding, data);
-	if (!(data->width > strlen))
-		data->width = strlen;
 	ft_data_len(data, data->width);
 	free(nb_str);
 }
-
