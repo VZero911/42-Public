@@ -61,19 +61,9 @@ static char	*add_int_sign(char *nb_str, int nb, t_struct *data)
 	if (nb < 0)
 		sign_char = '-';
 	else if ((data->flags & FLAG_PLUS))
-	{		
 		sign_char = '+';
-	}
 	else if (data->flags & FLAG_SPACE)
-	{
 		sign_char = ' ';
-	}
-	 if ((data->flags & FLAG_ZERO_PADDING) && 
-        !(data->flags & FLAG_LEFT_ALIGN) && 
-        data->precision == -1)
-    {
-        return (nb_str);
-    }
 	if (!sign_char)
 		return (nb_str);
 	signed_str = ft_calloc(ft_strlen(nb_str) + 2, sizeof(char));
@@ -110,12 +100,7 @@ void	ft_printf_int(t_struct *data)
 	nb_str = apply_int_precision(nb_str, data);
 	if (!nb_str)
 		return ;
-	if (!(data->flags & FLAG_ZERO_PADDING) || !(data->flags & FLAG_LEFT_ALIGN))
-    {
-        nb_str = add_int_sign(nb_str, nb, data);
-        if (!nb_str)
-            return ;
-    }
+       nb_str = add_int_sign(nb_str, nb, data);
 	if (!nb_str)
 		return ;
 	strlen = ft_strlen(nb_str);
