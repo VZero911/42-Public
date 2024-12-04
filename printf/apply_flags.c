@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 06:12:24 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/04 20:56:03 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,6 @@ void	print_and_pad(char *print_str, int padlen, char padding, t_struct *data)
 	}
 }
 
-char *handle_precision_and_strdup(char *str, t_struct *data)
-{
-	char	*print_str;
-	int		strlen;
-	
-	strlen = ft_strlen(str);
-	if (data->precision != -1 && data->precision < strlen)
-		print_str = ft_substr(str, 0, data->precision);
-	else
-		print_str = ft_strdup(str);
-	return (print_str);
-}
-
 char	padding_char(t_struct *data)
 {
 	char	padding_char;
@@ -60,4 +47,9 @@ void	apply_padding(char pad_char, int len)
 		write(1, &pad_char, 1);
 		len--;
 	}
+}
+
+void	ft_data_len(t_struct *data, int len)
+{
+	data->len += len;
 }

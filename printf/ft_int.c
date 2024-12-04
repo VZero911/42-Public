@@ -90,17 +90,27 @@ void	ft_printf_int(t_struct *data)
 	nb_str = prepare_int_str(nb);
 	if (!nb_str)
 		return ;
+	if (nb == 0 && data->precision == 0)
+	{
+	    free(nb_str);
+	    nb_str = ft_strdup("");
+	    if (!nb_str)
+	        return ;
+	}
 	if ((data->flags & FLAG_ZERO_PADDING) &&
 		!(data->flags & FLAG_LEFT_ALIGN) &&
 		data->precision == -1)
 	{
-		data->precision = data->width;
+		if (nb < 0)
+			data->precision = data->width - 1;
+		else
+			data->precision = data->width;
 		data->width = 0;
 	}
 	nb_str = apply_int_precision(nb_str, data);
 	if (!nb_str)
 		return ;
-   	nb_str = add_int_sign(nb_str, nb, data);
+	nb_str = add_int_sign(nb_str, nb, data);
 	if (!nb_str)
 		return ;
 	strlen = ft_strlen(nb_str);
@@ -110,6 +120,9 @@ void	ft_printf_int(t_struct *data)
 		padlen = 0;
 	padding = padding_char(data);
 	print_and_pad(nb_str, padlen, padding, data);
-	ft_data_len(data, (data->width > strlen) ? data->width : strlen);
+	if (!(data->width > strlen))
+		data->width = strlen;
+	ft_data_len(data, data->width);
 	free(nb_str);
 }
+

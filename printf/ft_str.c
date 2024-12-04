@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 05:58:24 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/04 20:46:47 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,43 @@ static char	*ft_ulltoa_base(t_ull n, const char *base)
 	return (result);
 }
 
+void ft_printf_string(t_struct *data)
+{
+    char *str;
+    char *print_str;
+    int strlen;
+    int padlen;
+    char padding;
+
+    str = data->var.s;
+    if (!str)
+	{
+	    if (data->precision == -1 || data->precision >= 6)
+	        str = "(null)";
+	    else
+	        str = "";
+	}
+	if (data->precision != -1 && data->precision < (int)ft_strlen(str))
+        print_str = ft_substr(str, 0, data->precision);
+    else
+        print_str = ft_strdup(str);
+    if (!print_str)
+        return;
+    strlen = ft_strlen(print_str);
+    if (data->width > strlen)
+        padlen = data->width - strlen;
+    else
+        padlen = 0;
+    padding = padding_char(data);
+    print_and_pad(print_str, padlen, padding, data);
+    if (data->width > strlen)
+        ft_data_len(data, data->width);
+    else
+        ft_data_len(data, strlen);
+    free(print_str);
+}
+
+
 char	*ft_pointer_to_str(t_ull ptr, const char *base)
 {
 	char	*str;
@@ -59,33 +96,4 @@ char	*ft_pointer_to_str(t_ull ptr, const char *base)
 	free(prefix);
 	free(hex);
 	return (str);
-}
-
-
-void ft_printf_string(t_struct *data)
-{
-	char *str;
-	char *print_str;
-	int strlen;
-	int padlen;
-	char padding;
-
-	str = data->var.s;
-	if (!str)
-	{
-			str = "(null)";
-	}
-	print_str = handle_precision_and_strdup(str, data);
-	strlen = ft_strlen(print_str);
-	if (data->width > strlen)
-		padlen = data->width - strlen;
-	else
-		padlen = 0;
-	padding = padding_char(data);
-	print_and_pad(print_str, padlen, padding, data);
-	if (data->width > strlen)
-		ft_data_len(data, data->width);
-	else
-		ft_data_len(data, strlen);
-	free(print_str);
 }
