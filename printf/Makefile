@@ -10,7 +10,8 @@ SRC	:= ft_printf.c \
 		ft_printf_hex.c \
 		check_for_flags.c \
 		apply_flags.c \
-		ft_pointer_to_str.c \
+		ft_int.c \
+		ft_str.c
 
 OBJ      := $(SRC:.c=.o)
 ARFLAGS   := rcs

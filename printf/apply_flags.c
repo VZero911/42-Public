@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/02 00:08:49 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/04 04:29:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ void	print_and_pad(char *print_str, int padlen, char padding, t_struct *data)
 char *handle_precision_and_strdup(char *str, t_struct *data)
 {
 	char	*print_str;
-	int		strlen = ft_strlen(str);
-
+	int		strlen;
+	
+	strlen = ft_strlen(str);
 	if (data->precision != -1 && data->precision < strlen)
 		print_str = ft_substr(str, 0, data->precision);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/02 00:04:49 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/04 01:45:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 
 # define SPECIFIER	"cspdiuxX%"
 # define FLAGS	"-0# +"
-# define FLAG_LEFT_ALIGN    (1 << 0)
-# define FLAG_ZERO_PADDING  (1 << 1)
-# define FLAG_HASH          (1 << 2)
-# define FLAG_SPACE         (1 << 3)
-# define FLAG_PLUS          (1 << 4)
+# define HEXA "0123456789abcdef"
+# define HEXA_UP "0123456789ABCDEF"
+# define FLAG_LEFT_ALIGN    0x1
+# define FLAG_ZERO_PADDING  0x2
+# define FLAG_HASH          0x4
+# define FLAG_SPACE         0x8
+# define FLAG_PLUS          0x16
 
 
 typedef enum e_type
@@ -58,6 +60,8 @@ typedef struct s_data
 	int		precision;
 }	t_struct;
 
+typedef unsigned long long t_ull;
+
 int		ft_printf(const char *str, ...);
 
 int		ft_printf_parsing(const char *str, va_list *args);
@@ -90,6 +94,6 @@ char	*handle_precision_and_strdup(char *str, t_struct *data);
 void	print_and_pad(char *print_str, int padlen, char padding, t_struct *data);
 char    padding_char(t_struct *data);
 
-char	*ft_pointer_to_str(unsigned long long ptr, const char *base);
+char	*ft_pointer_to_str(t_ull ptr, const char *base);
 
 #endif
