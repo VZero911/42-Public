@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_for_flags.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/02 10:09:34 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/04 06:21:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	check_for_precision(char **current, t_struct *data)
 {
 	if (**current == '.')
 	{
+		data->flags |= FLAG_PRECISION;
 		(*current)++;
 		data->precision = 0;
 		while (**current && ft_isdigit(**current))

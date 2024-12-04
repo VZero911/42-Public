@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 01:45:04 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/04 05:58:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,9 @@ void ft_printf_string(t_struct *data)
 
 	str = data->var.s;
 	if (!str)
-		str = "(null)";
+	{
+			str = "(null)";
+	}
 	print_str = handle_precision_and_strdup(str, data);
 	strlen = ft_strlen(print_str);
 	if (data->width > strlen)

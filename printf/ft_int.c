@@ -100,7 +100,7 @@ void	ft_printf_int(t_struct *data)
 	nb_str = apply_int_precision(nb_str, data);
 	if (!nb_str)
 		return ;
-       nb_str = add_int_sign(nb_str, nb, data);
+   	nb_str = add_int_sign(nb_str, nb, data);
 	if (!nb_str)
 		return ;
 	strlen = ft_strlen(nb_str);

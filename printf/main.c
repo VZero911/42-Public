@@ -114,7 +114,59 @@ int	main(void)
 	ft_printf("Custom:   |%10.2f|\n", flt);
 	printf("\n");
 
-	// Fin
+	printf("=== All tests complete! ===\n");
+
+	printf("%.03s\n", NULL);
+	ft_printf("%.03s\n", NULL);
+	printf("%3.1s\n", NULL);
+	ft_printf("%3.1s\n", NULL);
+	printf("%9.1s\n", NULL);
+	ft_printf("%9.1s\n", NULL);
+	printf("%-3.1s\n", NULL);
+	ft_printf("%-3.1s\n", NULL);
+	printf("%-9.1s\n", NULL);
+	ft_printf("%-9.1s\n", NULL);
+	printf("%.09s\n", NULL);
+	ft_printf("%.09s\n", NULL);
+	printf("%3.6s\n", NULL);
+	ft_printf("%3.6s\n", NULL);
+	printf("%20.6s\n", NULL);
+	ft_printf("%20.6s\n", NULL);
+	printf("%-3.8s\n", NULL);
+	ft_printf("%-3.8s\n", NULL);
+	printf("%-10.8s\n", NULL);
+	ft_printf("%-10.8s\n", NULL);
+	printf("%07i\n", -54);
+	ft_printf("%07i\n", -54);
+	printf("%04i\n", -532);
+	ft_printf("%04i\n", -532);
+	printf("%08.5i\n", 34);
+	ft_printf("%08.5i\n", 34);
+	printf("%010.5i\n", -216);
+	ft_printf("%010.5i\n", -216);
+	printf("%08.5i\n", 0);
+	ft_printf("%08.5i\n", 0);
+	printf("%08.3i\n", 8375);
+	ft_printf("%08.3i\n", 8375);
+	printf("%08.3i\n", -8473);
+	ft_printf("%08.3i\n", -8473);
+	printf("%.0i\n", 0);
+	ft_printf("%.0i\n", 0);
+	printf("%.i\n", 0);
+	ft_printf("%.i\n", 0);
+	printf("%5.0i\n", 0);
+	ft_printf("%5.0i\n", 0);
+	printf("%5.i\n", 0);
+	ft_printf("%5.i\n", 0);
+	printf("%-5.0i\n", 0);
+	ft_printf("%-5.0i\n", 0);
+	printf("%-5.i\n", 0);
+	ft_printf("%-5.i\n", 0);
+	printf("%07d\n", -54);
+	ft_printf("%07d\n", -54);
+	printf("%04d\n", -532);
+	ft_printf("%04d\n", -532);
+
 	printf("=== All tests complete! ===\n");
 	return (0);
 }

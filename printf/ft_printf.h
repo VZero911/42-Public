@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 05:19:33 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/04 06:21:08 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define FLAG_HASH          0x4
 # define FLAG_SPACE         0x8
 # define FLAG_PLUS          0x10
-
+# define FLAG_PRECISION     0x20
 
 typedef enum e_type
 {
