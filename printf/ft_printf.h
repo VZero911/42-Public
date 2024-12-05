@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/05 03:40:44 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/05 03:56:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ void	ft_printf_hex(t_struct *data, const char *base);
 
 char	*apply_int_precision(char *nb_str, t_struct *data);
 char	*ft_ulltoa_base(t_ull n, const char *base);
-int		ft_putnbr_hex_low(unsigned int nb);
-int		ft_putnbr_hex_up(unsigned int nb);
 
 void	check_for_flags(char **current, t_struct *data);
 
