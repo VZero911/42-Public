@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 21:44:58 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/05 03:40:44 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include <stdarg.h>
+# include <limits.h>
 
 # define SPECIFIER	"cspdiuxX%"
 # define FLAGS	"-0# +"
@@ -72,8 +73,7 @@ void	ft_printf_percentage(t_struct *data);
 void	ft_printf_pointer(t_struct *data);
 void	ft_printf_int(t_struct *data);
 void	ft_printf_uint(t_struct *data);
-void	ft_printf_hex_low(t_struct *data);
-void	ft_printf_hex_up(t_struct *data);
+void	ft_printf_hex(t_struct *data, const char *base);
 
 char	*apply_int_precision(char *nb_str, t_struct *data);
 char	*ft_ulltoa_base(t_ull n, const char *base);

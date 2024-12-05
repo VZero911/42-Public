@@ -4,10 +4,10 @@ LIB	:= libft/libft.a
 
 SRC	:= ft_printf.c \
 	   	ft_printf_parsing.c \
-		ft_printf_type.c \
-		ft_printf_hex.c \
 		check_for_flags.c \
+		ft_printf_type.c \
 		apply_flags.c \
+		ft_printf_hex.c \
 		ft_printf_str.c \
 		ft_printf_int.c \
 		ft_printf_uint.c \

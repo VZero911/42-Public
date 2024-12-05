@@ -37,6 +37,13 @@ static char *prepare_int_str(int nb)
 {
 	char	*nb_str;
 
+	if (nb == INT_MIN)
+	{
+		nb_str = ft_strdup("2147483648");
+		if (!nb_str)
+			return (NULL);
+		return (nb_str);
+	}
 	if (nb < 0)
 		nb_str = ft_itoa(-nb);
 	else

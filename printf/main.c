@@ -71,6 +71,8 @@ int	main(void)
 		// Test d'un entier
 	printf("\n\n\t=== Integer Tests ===\n\n");
 	// Cas avec -54
+	printf("Native:   |%d|\n", INT_MIN);
+	ft_printf("Custom:   |%d|\n", INT_MIN);
 	printf("Native:   |%07d|\n", -54);
 	ft_printf("Custom:   |%07d|\n", -54);
 	printf("Native:   |%04d|\n", -532);
@@ -176,7 +178,48 @@ int	main(void)
 	ft_printf("Custom:   |%#x|\n", hex);
 	printf("Native:   |%#X|\n", hex);
 	ft_printf("Custom:   |%#X|\n", hex);
+	printf("Native:   |%.5x|\n", 21);
+	ft_printf("Custom:   |%.5x|\n", 21);
+	printf("Native:   |%.3x|\n", 0);
+	ft_printf("Custom:   |%.3x|\n", 0);
+	printf("Native:   |%8.5x|\n", 34);
+	ft_printf("Custom:   |%8.5x|\n", 34);
+	printf("Native:   |%8.5x|\n", 0);
+	ft_printf("Custom:   |%8.5x|\n", 0);
+	printf("Native:   |%2.7x|\n", 3267);
+	ft_printf("Custom:   |%2.7x|\n", 3267);
+	printf("Native:   |%-8.5x|\n", 34);
+	ft_printf("Custom:   |%-8.5x|\n", 34);
+	printf("Native:   |%-8.5x|\n", 0);
+	ft_printf("Custom:   |%-8.5x|\n", 0);
+	printf("Native:   |%-2.7x|\n", 3267);
+	ft_printf("Custom:   |%-2.7x|\n", 3267);
+	printf("Native:   |%08.5x|\n", 34);
+	ft_printf("Custom:   |%08.5x|\n", 34);
+	printf("Native:   |%08.5x|\n", 0);
+	ft_printf("Custom:   |%08.5x|\n", 0);
+	printf("Native:   |%02.7x|\n", 3267);
+	ft_printf("Custom:   |%02.7x|\n", 3267);
+	printf("Native:   |%.0x|\n", 0);
+	ft_printf("Custom:   |%.0x|\n", 0);
+	printf("Native:   |%.x|\n", 0);
+	ft_printf("Custom:   |%.x|\n", 0);
+	printf("Native:   |%5.0x|\n", 0);
+	ft_printf("Custom:   |%5.0x|\n", 0);
+	printf("Native:   |%5.x|\n", 0);
+	ft_printf("Custom:   |%5.x|\n", 0);
+	printf("Native:   |%-5.0x|\n", 0);
+	ft_printf("Custom:   |%-5.0x|\n", 0);
+	printf("Native:   |%-5.x|\n", 0);
+	ft_printf("Custom:   |%-5.x|\n", 0);
+	printf("Native:   |%.5x|\n", 21);
+	ft_printf("Custom:   |%.5x|\n", 21);
+	printf("Native:   |%.3x|\n", 0);
+	ft_printf("Custom:   |%.3x|\n", 0);
+	printf("Native:   |%8.5x|\n", 34);
+	ft_printf("Custom:   |%8.5x|\n", 34);
 	printf("\n");
+	printf("\n\t=== Hexadecimal Test Complete ===\n\n");
 
 	// Test de précision
 	printf("\n\n\t=== Precision Test ===\n\n");

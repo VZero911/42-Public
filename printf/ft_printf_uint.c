@@ -75,10 +75,8 @@ static void handle_uint_width_padding(char *nb_str, t_struct *data)
 		padlen = 0;
 	padding = padding_char(data);
 	print_and_pad(nb_str, padlen, padding, data);
-
 	if (!(data->width > strlen))
 		data->width = strlen;
-
 	ft_data_len(data, data->width);
 }
 

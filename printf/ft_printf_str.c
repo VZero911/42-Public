@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_str.c                                           :+:      :+:    :+:   */
+/*   ft_printf_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 22:22:41 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/05 03:07:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,8 @@ void ft_printf_string(t_struct *data)
         padlen = 0;
     padding = padding_char(data);
     print_and_pad(print_str, padlen, padding, data);
-    if (data->width > strlen)
-        ft_data_len(data, data->width);
-    else
-        ft_data_len(data, strlen);
+    if (!(data->width > strlen))
+        data->width = strlen;
+    ft_data_len(data, data->width);
     free(print_str);
 }

@@ -6,56 +6,87 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 22:30:36 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/05 03:47:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_putnbr_hex_low(unsigned int nb)
+static void	print_with_prefix(const char *prefix, const char *str)
 {
-	char	*base;
-	int		len;
-
-	base = "0123456789abcdef";
-	len = 0;
-	if (nb >= 16)
-		len += ft_putnbr_hex_low(nb / 16);
-	ft_putchar_fd(base[nb % 16], 1);
-	len++;
-	return (len);
+	if (*prefix)
+		write(1, prefix, ft_strlen(prefix));
+	write(1, str, ft_strlen(str));
 }
 
-int	ft_putnbr_hex_up(unsigned int nb)
-{
-	char	*base;
-	int		len;
 
-	base = "0123456789ABCDEF";
-	len = 0;
-	if (nb >= 16)
-		len += ft_putnbr_hex_up(nb / 16);
-	ft_putchar_fd(base[nb % 16], 1);
-	len ++;
-	return (len);
+static void	print_and_pad_with_prefix(const char *prefix, const char *str, int padlen, t_struct *data)
+{
+	char padding;
+	
+	padding = padding_char(data);
+	if (!(data->flags & FLAG_LEFT_ALIGN))
+		while (padlen-- > 0)
+			write(1, &padding, 1);
+    if (*prefix)
+		write(1, prefix, ft_strlen(prefix));
+    write(1, str, ft_strlen(str));
+    if (data->flags & FLAG_LEFT_ALIGN)
+		while (padlen-- > 0)
+			write(1, &padding, 1);
 }
 
-void	ft_printf_hex_low(t_struct *data)
+
+static char	*prepare_hex_string(char **hex_str, int nb, t_struct *data, const char *base)
+{
+	char	*prefix;
+
+	if (nb == 0 && data->precision == 0)
+	{
+		free(*hex_str);
+		*hex_str = ft_strdup("");
+		if (!*hex_str)
+			return (NULL);
+	}
+	else
+	{
+		*hex_str = apply_int_precision(*hex_str, data);
+		if (!*hex_str)
+			return (NULL);
+	}
+	prefix = "";
+	if ((data->flags & FLAG_HASH) && data->var.x != 0)
+	{
+		if (!ft_strncmp(base, HEXA, 16))
+			prefix = "0x";
+		else
+			prefix = "0X";
+	}
+
+    return (prefix);
+}
+
+void ft_printf_hex(t_struct *data, const char *base)
 {
 	unsigned int	nb;
+	char			*hex_str;
+	char			*prefix;
 	int				len;
 
 	nb = data->var.x;
-	len = ft_putnbr_hex_low(nb);
-	ft_data_len(data, len);
-}
-
-void	ft_printf_hex_up(t_struct *data)
-{
-	unsigned int	nb;
-	int				len;
-
-	nb = data->var.x;
-	len = ft_putnbr_hex_up(nb);
-	ft_data_len(data, len);
+	hex_str = ft_ulltoa_base(nb, base);
+	if (!hex_str)
+		return;
+	prefix = prepare_hex_string(&hex_str, nb, data, base);
+	if (!hex_str)
+		return;
+	len = ft_strlen(hex_str) + ft_strlen(prefix);
+	if (data->width > len)
+		print_and_pad_with_prefix(prefix, hex_str, data->width - len, data);
+    else
+		print_with_prefix(prefix, hex_str);
+	if (!(data->width > len))
+		data->width = len;
+	ft_data_len(data, data->width);
+	free(hex_str);
 }

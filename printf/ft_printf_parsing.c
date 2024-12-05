@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 21:08:45 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/05 03:03:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ static void	ft_printf_data(t_struct *data)
 	else if (data->type == SPECIFIER_PERCENTAGE)
 		ft_printf_percentage(data);
 	else if (data->type == SPECIFIER_HEX_LOW)
-		ft_printf_hex_low(data);
+		ft_printf_hex(data, HEXA);
 	else if (data->type == SPECIFIER_HEX_UP)
-		ft_printf_hex_up(data);
+		ft_printf_hex(data, HEXA_UP);
 }
 
 int	ft_printf_parsing(const char *str, va_list *args)
