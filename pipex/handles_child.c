@@ -84,11 +84,14 @@ void	handles_child(t_pipex *pipex, char **argv, char **envp, int i)
 	pipex->cmd_args = parse_command(argv[2 + i]);
 	if (!pipex->cmd_args)
 	{
-		perror("Malloc Error");
+		ft_putstr_fd("Malloc Error", 2);
 		cleanup_pipex(pipex);
 		exit(1);
 	}
-	pipex->cmd_paths = find_command_path(pipex->cmd_args[0], envp);
+	if (access(pipex->cmd_args[0], X_OK) == 0)
+		pipex->cmd_paths = pipex->cmd_args[0];
+	else
+		pipex->cmd_paths = find_command_path(pipex->cmd_args[0], envp);
 	if (!pipex->cmd_paths)
 	{
 		ft_free_char_tab(pipex->cmd_args);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_hex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/05 03:47:09 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/05 15:32:08 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,25 @@ static void	print_with_prefix(const char *prefix, const char *str)
 	write(1, str, ft_strlen(str));
 }
 
-
-static void	print_and_pad_with_prefix(const char *prefix, const char *str, int padlen, t_struct *data)
+static void	print_and_pad_with_prefix(const char *prefix,
+			const char *str, int padlen, t_struct *data)
 {
-	char padding;
-	
+	char	padding;
+
 	padding = padding_char(data);
 	if (!(data->flags & FLAG_LEFT_ALIGN))
 		while (padlen-- > 0)
 			write(1, &padding, 1);
-    if (*prefix)
+	if (*prefix)
 		write(1, prefix, ft_strlen(prefix));
-    write(1, str, ft_strlen(str));
-    if (data->flags & FLAG_LEFT_ALIGN)
+	write(1, str, ft_strlen(str));
+	if (data->flags & FLAG_LEFT_ALIGN)
 		while (padlen-- > 0)
 			write(1, &padding, 1);
 }
 
-
-static char	*prepare_hex_string(char **hex_str, int nb, t_struct *data, const char *base)
+static char	*prepare_hex_string(char **hex_str,
+			int nb, t_struct *data, const char *base)
 {
 	char	*prefix;
 
@@ -62,11 +62,10 @@ static char	*prepare_hex_string(char **hex_str, int nb, t_struct *data, const ch
 		else
 			prefix = "0X";
 	}
-
-    return (prefix);
+	return (prefix);
 }
 
-void ft_printf_hex(t_struct *data, const char *base)
+void	ft_printf_hex(t_struct *data, const char *base)
 {
 	unsigned int	nb;
 	char			*hex_str;
@@ -76,14 +75,14 @@ void ft_printf_hex(t_struct *data, const char *base)
 	nb = data->var.x;
 	hex_str = ft_ulltoa_base(nb, base);
 	if (!hex_str)
-		return;
+		return ;
 	prefix = prepare_hex_string(&hex_str, nb, data, base);
 	if (!hex_str)
-		return;
+		return ;
 	len = ft_strlen(hex_str) + ft_strlen(prefix);
 	if (data->width > len)
 		print_and_pad_with_prefix(prefix, hex_str, data->width - len, data);
-    else
+	else
 		print_with_prefix(prefix, hex_str);
 	if (!(data->width > len))
 		data->width = len;

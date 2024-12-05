@@ -12,12 +12,12 @@
 
 #include "ft_printf.h"
 
-static char *prepare_uint_str(unsigned int nb)
+static char	*prepare_uint_str(unsigned int nb)
 {
-	char            *nb_str;
-	char            *temp;
-	int             i;
-	unsigned int    n;
+	char			*nb_str;
+	char			*temp;
+	int				i;
+	unsigned int	n;
 
 	if (nb == 0)
 		return (ft_strdup("0"));
@@ -38,11 +38,11 @@ static char *prepare_uint_str(unsigned int nb)
 	return (temp);
 }
 
-static char *process_uint_precision(char *nb_str, t_struct *data)
+static char	*process_uint_precision(char *nb_str, t_struct *data)
 {
-	char    *precision_str;
-	int     precision_len;
-	int     nb_len;
+	char	*precision_str;
+	int		precision_len;
+	int		nb_len;
 
 	if (data->precision == -1)
 		return (nb_str);
@@ -62,11 +62,11 @@ static char *process_uint_precision(char *nb_str, t_struct *data)
 	return (precision_str);
 }
 
-static void handle_uint_width_padding(char *nb_str, t_struct *data)
+static void	handle_uint_width_padding(char *nb_str, t_struct *data)
 {
-	int     strlen;
-	int     padlen;
-	char    padding;
+	int		strlen;
+	int		padlen;
+	char	padding;
 
 	strlen = ft_strlen(nb_str);
 	if (data->width > strlen)
@@ -80,37 +80,37 @@ static void handle_uint_width_padding(char *nb_str, t_struct *data)
 	ft_data_len(data, data->width);
 }
 
-static void process_uint_special_flags(t_struct *data)
+static void	process_uint_special_flags(t_struct *data)
 {
-	if ((data->flags & FLAG_ZERO_PADDING) &&
-		!(data->flags & FLAG_LEFT_ALIGN) &&
-		data->precision == -1)
+	if ((data->flags & FLAG_ZERO_PADDING)
+		&& !(data->flags & FLAG_LEFT_ALIGN)
+		&& data->precision == -1)
 	{
 		data->precision = data->width;
 		data->width = 0;
 	}
 }
 
-void ft_printf_uint(t_struct *data)
+void	ft_printf_uint(t_struct *data)
 {
-	unsigned int    nb;
-	char            *nb_str;
+	unsigned int	nb;
+	char			*nb_str;
 
 	nb = data->var.u;
 	nb_str = prepare_uint_str(nb);
 	if (!nb_str)
-		return;
+		return ;
 	if (nb == 0 && data->precision == 0)
 	{
 		free(nb_str);
 		nb_str = ft_strdup("");
 		if (!nb_str)
-			return;
+			return ;
 	}
 	process_uint_special_flags(data);
 	nb_str = process_uint_precision(nb_str, data);
 	if (!nb_str)
-		return;
+		return ;
 	handle_uint_width_padding(nb_str, data);
 	free(nb_str);
 }

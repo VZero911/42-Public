@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   apply_flags.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 22:15:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/05 15:28:38 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_and_pad(char *print_str, int padlen, char padding, t_struct *data)
 {
 	int	strlen;
-	
+
 	strlen = ft_strlen(print_str);
 	if (data->flags & FLAG_LEFT_ALIGN)
 	{
@@ -54,8 +54,7 @@ void	ft_data_len(t_struct *data, int len)
 	data->len += len;
 }
 
-
-char *apply_int_precision(char *nb_str, t_struct *data)
+char	*apply_int_precision(char *nb_str, t_struct *data)
 {
 	int		precision_len;
 	int		nb_len;

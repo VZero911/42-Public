@@ -3,33 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_type.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 21:06:57 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/05 15:26:02 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void ft_printf_char(t_struct *data)
+void	ft_printf_char(t_struct *data)
 {
-	int     c;
-	char    padding;
-	int     padlen;
+	int		c;
+	char	padding;
+	int		padlen;
 
 	c = data->var.c;
 	padlen = data->width - 1;
 	padding = padding_char(data);
 	if (data->flags == FLAG_LEFT_ALIGN)
 	{
-		ft_putchar_fd(c ,1);
+		ft_putchar_fd(c, 1);
 		apply_padding(padding, padlen);
 	}
 	else
 	{
 		apply_padding(padding, padlen);
-		ft_putchar_fd(c ,1);
+		ft_putchar_fd(c, 1);
 	}
 	if (data->width > 1)
 		ft_data_len(data, data->width);

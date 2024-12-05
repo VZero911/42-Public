@@ -77,6 +77,8 @@ int	main(void)
 	ft_printf("Custom:   |%07d|\n", -54);
 	printf("Native:   |%04d|\n", -532);
 	ft_printf("Custom:   |%04d|\n", -532);
+	printf("%d\n", printf("Native:   |%-1d|\n", 10));
+	printf("%d\n", ft_printf("Custom:   |%-1d|\n", 10));
 	// Cas avec précision et largeur
 	printf("Native:   |%08.5i|\n", 34);
 	ft_printf("Custom:   |%08.5i|\n", 34);

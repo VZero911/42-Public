@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/05 04:00:57 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/05 15:26:29 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,10 @@ char	*ft_ulltoa_base(t_ull n, const char *base)
 	return (result);
 }
 
-static char *prepare_string(t_struct *data)
+static char	*prepare_string(t_struct *data)
 {
-	char *str;
-	char *print_str;
+	char	*str;
+	char	*print_str;
 
 	str = data->var.s;
 	if (!str)
@@ -67,12 +67,12 @@ static char *prepare_string(t_struct *data)
 	return (print_str);
 }
 
-void ft_printf_string(t_struct *data)
+void	ft_printf_string(t_struct *data)
 {
-	char *print_str;
-	int strlen;
-	int padlen;
-	char padding;
+	char	*print_str;
+	int		strlen;
+	int		padlen;
+	char	padding;
 
 	print_str = prepare_string(data);
 	if (!print_str)

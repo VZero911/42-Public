@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/03 18:13:51 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/05 15:59:00 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@ void	free_if_execve_fail(char **cmd_args, char *cmd_path)
 
 char	**parse_command(char *cmd)
 {
+	if (cmd[0] == ' ')
+	{
+		ft_putstr_fd("Command not found :", 2);
+		ft_putstr_fd(cmd, 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
+	}
 	return (ft_split(cmd, ' '));
 }
 
@@ -77,25 +84,3 @@ t_pipex	*open_file(t_pipex *pipex, bool is_input)
 	}
 	return (pipex);
 }
-
-// int	validate_files(char *input_file, char *output_file)
-// {
-// 	int	input_fd;
-// 	int	output_fd;
-
-// 	input_fd = open(input_file, O_RDONLY);
-// 	if (input_fd < 0)
-// 	{
-// 		perror("Error opening input file");
-// 		return (-1);
-// 	}
-// 	close(input_fd);
-// 	output_fd = open(output_file, O_CREAT | O_WRONLY | O_TRUNC, 0644);
-// 	if (output_fd < 0)
-// 	{
-// 		perror("Error opening/creating output file");
-// 		return (-1);
-// 	}
-// 	close(output_fd);
-// 	return (0);
-// }

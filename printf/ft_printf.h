@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/05 03:56:56 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/05 15:29:30 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ typedef struct s_data
 	int		precision;
 }	t_struct;
 
-typedef unsigned long long t_ull;
+typedef unsigned long long	t_ull;
 
 int		ft_printf(const char *str, ...);
 
@@ -82,7 +82,8 @@ void	check_for_flags(char **current, t_struct *data);
 
 void	ft_data_len(t_struct *data, int len);
 void	apply_padding(char pad_char, int len);
-void	print_and_pad(char *print_str, int padlen, char padding, t_struct *data);
-char    padding_char(t_struct *data);
+void	print_and_pad(char *print_str,
+			int padlen, char padding, t_struct *data);
+char	padding_char(t_struct *data);
 
 #endif
