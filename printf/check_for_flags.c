@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/04 06:21:50 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/04 22:32:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,3 @@ void	check_for_flags(char **current, t_struct *data)
 	if (**current)
 		check_for_precision(current, data);
 }
-

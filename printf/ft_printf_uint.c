@@ -116,4 +116,3 @@ void ft_printf_uint(t_struct *data)
 	handle_uint_width_padding(nb_str, data);
 	free(nb_str);
 }
-

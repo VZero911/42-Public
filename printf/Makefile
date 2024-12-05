@@ -5,7 +5,6 @@ LIB	:= libft/libft.a
 SRC	:= ft_printf.c \
 	   	ft_printf_parsing.c \
 		ft_printf_type.c \
-		ft_printf_type2.c \
 		ft_printf_hex.c \
 		check_for_flags.c \
 		apply_flags.c \
