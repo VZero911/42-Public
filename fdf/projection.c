@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 05:02:08 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/23 05:49:28 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/06 21:46:50 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ t_point	project_isometric(double x, double y, double z, t_fdf *data)
 	t_point	p;
 
 	p.x = (x - y) * cos(ISO_ANGLES) * data->zoom + WIN_WIDTH / 2;
-	p.y = ((x + y) * sin(ISO_ANGLES) - z) * data->zoom + WIN_HEIGHT / 2;
-	p.z = z;
+	p.y = ((x + y) * sin(ISO_ANGLES) - ((z * data->coef) / 8))
+		* data->zoom + WIN_HEIGHT / 2;
+	p.z = (z * data->coef) / 8;
 	return (p);
 }

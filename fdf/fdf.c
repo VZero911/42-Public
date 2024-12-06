@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:13 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/23 06:12:46 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/06 21:25:26 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(int argc, char **argv)
 		data->x = 0;
 		data->shift_x = 0;
 		data->shift_y = 0;
+		data->coef = 3;
 		data->rotation_x = 0.0;
 		data->rotation_y = 0.0;
 		data->rotation_z = 0.0;

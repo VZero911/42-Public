@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:02 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/03 18:56:36 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/06 21:25:32 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,13 @@
 # define KEY_E XK_e
 # define KEY_P XK_p
 # define KEY_I XK_i
+# define KEY_R XK_r
+# define KEY_F XK_f
 # define KEY_SPACE XK_space
 # define KEY_ESC XK_Escape
 # define MOVE_SPEED 1
 # define ROTATE_ANGLE 0.1
+# define COEF 3
 # define KEY_UP      65362
 # define KEY_DOWN    65364
 # define KEY_LEFT    65361
@@ -86,6 +89,7 @@ typedef struct s_fdf
 	int     y;
 	int		shift_x;
 	int		shift_y;
+	int		coef;
 	double rotation_x;
     double rotation_y;
     double rotation_z;

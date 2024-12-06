@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/06 16:20:13 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/06 18:57:38 by jdumay           ###   ########.fr       */
+/*   Created: 2024/12/06 18:53:05 by jdumay            #+#    #+#             */
+/*   Updated: 2024/12/06 18:56:27 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+void    error_exit(const char *error)
 {
-	t_data  data;
-
-	if (argc == 5 || argc == 6)
-	{
-		parse_input(&data, argc, argv);
-	}
-	else
-		error_exit("Wrong Input");
+	printf("%s\n", error);
+	exit(EXIT_FAILURE);
 }
