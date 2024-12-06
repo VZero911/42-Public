@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/03 18:29:45 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/06 17:55:34 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ int	main(int argc, char **argv, char **envp)
 	if (argc < 5)
 	{
 		ft_putstr_fd("Usage: ./pipex infile \"cmd1\" \"cmd2\" outfile\n", 2);
-		ft_putstr_fd("Or\nUsage: ./pipex infile \"cmd1\" \"cmd2\" \"cmd3\" ", 2);
-		ft_putstr_fd("... \"cmdn\" outfile\nOr\nUsage : ./pipex heredoc", 2);
-		ft_putstr_fd(" EOF \"cmd1\" \"cmd2\" outfile\nOr\n", 2);
-		return (ft_putstr_fd("Usage : ./pipex EOF \"cmd1\" outfile\n", 2), 0);
+		ft_putstr_fd("Or\nUsage: ./pipex infile \"cmd1\" \"cmd2\" \"cmd3", 2);
+		ft_putstr_fd("\" ... \"cmdn\" outfile\nOr\nUsage : ./pipex ", 2);
+		ft_putstr_fd("heredoc EOF \"cmd1\" \"cmd2\" outfile\nOr\nUsage :", 2);
+		return (ft_putstr_fd(" ./pipex heredoc EOF \"cmd1\" outfile\n", 2), 0);
 	}
 	init_pipex(&pipex, argc, argv);
 	if (!ft_strncmp(pipex.input_file, "here_doc", 8))
 	{
 		if (!(argc == 5 || argc == 6))
 		{
-			ft_putstr_fd("Usage : ./pipex heredoc", 2);
-			return (ft_putstr_fd(" EOF \"cmd1\" \"cmd2\" outfile\n", 2), 0);
+			ft_putstr_fd("Usage : ./pipex heredoc EOF \"cmd1\" \"cmd2\" ", 2);
+			ft_putstr_fd("outfile\nOr\nUsage : ./pipex heredoc EOF", 2);
+			return (ft_putstr_fd(" \"cmd1\" outfile\n", 2), 0);
 		}
 		pipex.pipe_count = 1;
 		handle_heredoc(&pipex, argc, argv, envp);

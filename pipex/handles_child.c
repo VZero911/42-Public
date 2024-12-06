@@ -72,6 +72,21 @@ void	handle_intermediate_child(t_pipex *pipex, int i)
 	}
 }
 
+void	get_commands(t_pipex *pipex, char **envp)
+{
+	if (access(pipex->cmd_args[0], X_OK) == 0)
+		pipex->cmd_paths = pipex->cmd_args[0];
+	else
+		pipex->cmd_paths = find_command_path(pipex->cmd_args[0], envp);
+	if (!pipex->cmd_paths)
+	{
+		ft_free_char_tab(pipex->cmd_args);
+		ft_putstr_fd("Command not found", 2);
+		cleanup_pipex(pipex);
+		exit(127);
+	}
+}
+
 void	handles_child(t_pipex *pipex, char **argv, char **envp, int i)
 {
 	if (i == 0)
@@ -88,17 +103,7 @@ void	handles_child(t_pipex *pipex, char **argv, char **envp, int i)
 		cleanup_pipex(pipex);
 		exit(1);
 	}
-	if (access(pipex->cmd_args[0], X_OK) == 0)
-		pipex->cmd_paths = pipex->cmd_args[0];
-	else
-		pipex->cmd_paths = find_command_path(pipex->cmd_args[0], envp);
-	if (!pipex->cmd_paths)
-	{
-		ft_free_char_tab(pipex->cmd_args);
-		perror("Command not found");
-		cleanup_pipex(pipex);
-		exit(127);
-	}
+	get_commands(pipex, envp);
 	cleanup_pipex(pipex);
 	if (execve(pipex->cmd_paths, pipex->cmd_args, envp) < 0)
 		return (free_if_execve_fail(pipex->cmd_args, pipex->cmd_paths));

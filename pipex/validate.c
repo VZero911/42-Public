@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/05 15:59:00 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/06 17:56:49 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*find_command_path(char *cmd, char **envp)
 t_pipex	*open_file(t_pipex *pipex, bool is_input)
 {
 	pipex->input_fd = -1;
-    pipex->output_fd = -1;
+	pipex->output_fd = -1;
 	pipex->input_fd = open(pipex->input_file, O_RDONLY);
 	if (pipex->input_fd < 0 && is_input == true)
 	{
