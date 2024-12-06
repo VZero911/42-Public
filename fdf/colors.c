@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 05:59:06 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/06 21:47:39 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/06 22:04:52 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,50 +48,50 @@ int	calculate_interval_color(int z)
 	if (z <= 0)
 		return (0xF5DEB3);
 	if (z <= 2)
-		return (0xEEE8AA);
+		return (0xFFD700);
 	if (z <= 4)
-		return (0xD2B48C);
+		return (0xFFA500);
 	if (z <= 6)
-		return (0xCD853F);
+		return (0xFF6347);
 	if (z <= 8)
-		return (0xBC8F8F);
+		return (0xFF4500);
 	if (z <= 10)
-		return (0xA0522D);
+		return (0xFF0000);
 	if (z <= 15)
-		return (0x8B4513);
+		return (0xDC143C);
 	if (z <= 20)
-		return (0x6B8E23);
+		return (0xC71585);
 	if (z <= 25)
-		return (0x556B2F);
+		return (0x800080);
 	if (z <= 30)
-		return (0x228B22);
+		return (0x4B0082);
 	if (z <= 35)
-		return (0x32CD32);
+		return (0x8B0000);
 	return (-1);
 }
 
 int	calculate_high_color(int z)
 {
 	if (z <= 40)
-		return (0x808080);
+		return (0xCD853F);
 	if (z <= 45)
 		return (0xA9A9A9);
 	if (z <= 50)
-		return (0xD3D3D3);
+		return (0x8B4513);
 	if (z <= 60)
-		return (0xFFFFFF);
+		return (0xA0522D);
 	if (z <= 70)
-		return (0xF0F8FF);
+		return (0xD2691E);
 	if (z <= 80)
-		return (0xE6E6FA);
-	if (z <= 90)
 		return (0xFFD700);
+	if (z <= 90)
+		return (0xFF8C00);
 	if (z <= 100)
-		return (0xDAA520);
+		return (0xFF6347);
 	if (z <= 110)
-		return (0x8B0000);
+		return (0xDC143C);
 	if (z <= 120)
-		return (0x800080);
+		return (0x8B0000);
 	return (0x4B0082);
 }
 

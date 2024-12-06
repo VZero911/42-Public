@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 05:02:08 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/06 21:46:50 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/06 22:01:08 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_point	project_military(double x, double y, double z, t_fdf *data)
 	t_point	p;
 
 	p.x = x * data->zoom + WIN_WIDTH / 2;
-	p.y = (y - z * 0.5) * data->zoom + WIN_HEIGHT / 2;
+	p.y = (y - z * data->coef) * data->zoom + WIN_HEIGHT / 2;
 	p.z = z;
 	return (p);
 }
@@ -49,7 +49,7 @@ t_point	project_parallel(double x, double y, double z, t_fdf *data)
 	t_point	p;
 
 	p.x = (x * data->zoom + WIN_WIDTH / 3);
-	p.y = (y * data->zoom + WIN_HEIGHT / 3) - (z * 0.5);
+	p.y = (y * data->zoom + WIN_HEIGHT / 3) - (z * data->coef);
 	p.z = z;
 	return (p);
 }
