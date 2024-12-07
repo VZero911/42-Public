@@ -1,6 +1,6 @@
 NAME := philo
 CFLAGS := -Wall -Wextra -Werror
-SRC := philo.c \
+SRC := philo.c parsing.c utils.c data_init.c \
 
 OBJ := $(SRC:.c=.o)
 

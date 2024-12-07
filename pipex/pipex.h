@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:13:14 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/06 17:41:38 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/07 04:40:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_pipex	*open_file(t_pipex *pipex, bool is_input);
 
 void	free_heredoc_resources(t_pipex *pipex);
 void	close_pipes(t_pipex *pipex);
-void	write_heredoc_input(char *limiter);
+void	heredoc_exit(char *msg_error, char **cmd_args, int exit_code);
 void	waitpid_all(t_pipex *pipex);
 
 #endif

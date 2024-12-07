@@ -81,7 +81,9 @@ void	get_commands(t_pipex *pipex, char **envp)
 	if (!pipex->cmd_paths)
 	{
 		ft_free_char_tab(pipex->cmd_args);
-		ft_putstr_fd("Command not found", 2);
+		ft_putstr_fd("Command not found :", 2);
+		ft_putstr_fd(pipex->cmd_args[0], 2);
+		ft_putstr_fd("\n", 2);
 		cleanup_pipex(pipex);
 		exit(127);
 	}
@@ -99,7 +101,7 @@ void	handles_child(t_pipex *pipex, char **argv, char **envp, int i)
 	pipex->cmd_args = parse_command(argv[2 + i]);
 	if (!pipex->cmd_args)
 	{
-		ft_putstr_fd("Malloc Error", 2);
+		ft_putstr_fd("Malloc Error\n", 2);
 		cleanup_pipex(pipex);
 		exit(1);
 	}

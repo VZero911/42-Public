@@ -1,20 +1,6 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_heredoc.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 23:15:00 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/02 23:15:00 by marvin           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "pipex.h"
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
 /*   heredoc_main.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
@@ -26,13 +12,30 @@
 
 #include "pipex.h"
 
-static void	heredoc_exit(char *msg_error, char **cmd_args, int error_code)
+static void	write_heredoc_input(char *limiter)
 {
-	ft_putstr_fd(msg_error, 2);
-	ft_putstr_fd(cmd_args[0], 2);
-	ft_putstr_fd("\n", 2);
-	ft_free_char_tab(cmd_args);
-	exit(error_code);
+	char	*line;
+	int		tmp_fd;
+
+	tmp_fd = open("/tmp/heredoc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (tmp_fd == -1)
+		exit(1);
+	while (1)
+	{
+		ft_putstr_fd("heredoc> ", 1);
+		line = get_next_line(0);
+		if (!line)
+			break ;
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
+			&& line[ft_strlen(limiter)] == '\n')
+		{
+			free(line);
+			break ;
+		}
+		ft_putstr_fd(line, tmp_fd);
+		free(line);
+	}
+	close(tmp_fd);
 }
 
 static void	execute_cmd(char *cmd_str, char **envp)

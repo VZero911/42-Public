@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:20:17 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/06 18:56:38 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/07 05:18:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,24 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <errno.h>
 # include <pthread.h>
 # include <sys/wait.h>
 # include <limits.h>
 
 typedef struct t_data;
 typedef pthread_mutex_t t_mutex;
+
+typedef enum e_mutex_code
+{
+	LOCK	= 0,
+	UNLOCK	= 1,
+	INIT	= 2,
+	DESTROY	= 3,
+	CREATE	= 4,
+	JOIN	= 5,
+	DETACH	= 6,
+}		t_mutex_code;
 
 typedef struct s_fork
 {
@@ -54,6 +66,11 @@ typedef struct s_data
 	t_fork  *forks;
 	t_philo *philos;
 }   t_data;
+
+void    parse_input(t_data *data, char **argv);
+void    data_init(t_data *philo);
+
+void	mutex_handle(t_mutex *mutex, t_mutex_code code);
 
 void    error_exit(const char *error);
 

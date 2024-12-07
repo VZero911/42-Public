@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 00:00:00 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/06 17:56:39 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/07 04:40:09 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,13 @@ void	close_pipes(t_pipex *pipex)
 	}
 }
 
-void	write_heredoc_input(char *limiter)
+void	heredoc_exit(char *msg_error, char **cmd_args, int exit_code)
 {
-	char	*line;
-	int		tmp_fd;
-
-	tmp_fd = open("/tmp/heredoc_tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (tmp_fd == -1)
-		exit(1);
-	while (1)
-	{
-		ft_putstr_fd("heredoc> ", 1);
-		line = get_next_line(0);
-		if (!line)
-			break ;
-		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0
-			&& line[ft_strlen(limiter)] == '\n')
-		{
-			free(line);
-			break ;
-		}
-		ft_putstr_fd(line, tmp_fd);
-		free(line);
-	}
-	close(tmp_fd);
+	ft_putstr_fd(msg_error, 2);
+	ft_putstr_fd(cmd_args[0], 2);
+	ft_putstr_fd("\n", 2);
+	ft_free_char_tab(cmd_args);
+	exit(exit_code);
 }
 
 void	waitpid_all(t_pipex *pipex)
