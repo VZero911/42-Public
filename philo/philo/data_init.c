@@ -17,9 +17,12 @@ static void	assign_forks(t_philo *philo, t_fork *forks, int pos)
 	int	philo_nbr;
 
 	philo_nbr = philo->data->philo_nbr;
-	philo->left_fork = &forks[(pos + 1) % philo_nbr];
-	philo->right_fork = &forks[pos];
-	if (philo->id % 2)
+	if (philo->id % 2 == 1)
+	{
+		philo->right_fork = &forks[(pos + 1) % philo_nbr];
+		philo->left_fork = &forks[pos];
+	}
+	else
 	{
 		philo->right_fork = &forks[pos];
 		philo->left_fork = &forks[(pos + 1) % philo_nbr];

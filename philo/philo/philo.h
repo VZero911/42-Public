@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:20:17 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/07 05:18:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/07 05:35:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_data
 	long	meals_limit;
 	long	start_simulation;
 	bool	end_simulation;
+	bool	ready_to_start;
 	t_fork  *forks;
 	t_philo *philos;
 }   t_data;
