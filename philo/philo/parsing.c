@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:57:49 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/07 03:37:25 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/07 05:23:33 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ static long	ft_atol(const char *str)
 		num = (num * 10) + (*str++ - 48);
 	if (num > INT_MAX)
 		error_exit("INT_MAX is the limit");
+	if (str)
+		error_exit("Should not have other characters than digits !");
 	return (num);
 }
 
