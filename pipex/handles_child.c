@@ -80,10 +80,10 @@ void	get_commands(t_pipex *pipex, char **envp)
 		pipex->cmd_paths = find_command_path(pipex->cmd_args[0], envp);
 	if (!pipex->cmd_paths)
 	{
-		ft_free_char_tab(pipex->cmd_args);
 		ft_putstr_fd("Command not found :", 2);
 		ft_putstr_fd(pipex->cmd_args[0], 2);
 		ft_putstr_fd("\n", 2);
+		ft_free_char_tab(pipex->cmd_args);
 		cleanup_pipex(pipex);
 		exit(127);
 	}

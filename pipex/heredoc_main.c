@@ -85,7 +85,7 @@ static void	heredoc_child_process(t_pipex *pipex, char **argv,
 	execute_cmd(argv[i + 3], envp);
 }
 
-static void	create_pipes_and_fork(t_pipex *pipex, int argc,
+static void	create_pipes_and_fork(t_pipex *pipex,
 			char **argv, char **envp)
 {
 	int	i;
@@ -98,16 +98,13 @@ static void	create_pipes_and_fork(t_pipex *pipex, int argc,
 			exit(1);
 		if (pipex->pid[i] == 0)
 		{
-			if (argc == 5)
-				heredoc_child_process(pipex, argv - 1, envp, i);
-			else
-				heredoc_child_process(pipex, argv, envp, i);
+			heredoc_child_process(pipex, argv, envp, i);
 		}
 		i++;
 	}
 }
 
-void	handle_heredoc(t_pipex *pipex, int argc, char **argv, char **envp)
+void	handle_heredoc(t_pipex *pipex, char **argv, char **envp)
 {
 	int	pipe_fd[2];
 
@@ -125,7 +122,7 @@ void	handle_heredoc(t_pipex *pipex, int argc, char **argv, char **envp)
 		exit(1);
 	pipex->heredoc_pipe[WRITE] = pipe_fd[1];
 	pipex->heredoc_pipe[READ] = pipe_fd[0];
-	create_pipes_and_fork(pipex, argc, argv, envp);
+	create_pipes_and_fork(pipex, argv, envp);
 	close_pipes(pipex);
 	waitpid_all(pipex);
 	unlink("/tmp/heredoc_tmp");

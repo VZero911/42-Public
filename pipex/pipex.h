@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/29 00:13:14 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/07 04:40:40 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/08 15:38:22 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_pipex
 void	multiples_pipes(t_pipex *pipex, char **argv, char **envp);
 void	cleanup_pipex(t_pipex *pipex);
 void	handles_child(t_pipex *pipex, char **argv, char **envp, int i);
-void	handle_heredoc(t_pipex *pipex, int argc, char **argv, char **envp);
+void	handle_heredoc(t_pipex *pipex, char **argv, char **envp);
 
 char	**parse_command(char *cmd);
 void	close_all_pipes(t_pipex *pipex);
