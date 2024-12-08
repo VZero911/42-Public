@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:57:49 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/07 05:23:33 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/08 19:14:27 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static const char *is_valid_input(const char *str)
 	int			len;
 	const char	*number;
 
-	while(is_space(str))
+	len = 0;
+	while(is_space(*str))
 		str++;
 	if (*str == '+')
 		str++;
@@ -49,11 +50,11 @@ static long	ft_atol(const char *str)
 	
 	num = 0;
 	str = is_valid_input(str);
-	while (is_digit(str))
+	while (is_digit(*str))
 		num = (num * 10) + (*str++ - 48);
 	if (num > INT_MAX)
 		error_exit("INT_MAX is the limit");
-	if (str)
+	if (*str != '\0')
 		error_exit("Should not have other characters than digits !");
 	return (num);
 }

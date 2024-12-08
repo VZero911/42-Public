@@ -12,7 +12,38 @@
 
 #include "philo.h"
 
-static void	handle_mutex_error(int status, t_mutex_code code)
+static void	handle_thread_error(int status, t_code code)
+{
+	if (status == 0)
+		return ;
+	if (status == EAGAIN && code == CREATE)
+		error_exit("Not enough resources to create another thread");
+	else if (status == EINVAL && code == JOIN)
+		error_exit("Thread is not a joinable thread or already joined");
+	else if (status == ESRCH && code == JOIN)
+		error_exit("No thread with the ID could be found");
+	else if (status == EDEADLK)
+		error_exit("Deadlock detected while joining thread");
+	else if (status == EINVAL && code == DETACH)
+		error_exit("Thread is not joinable or already detached");
+	else
+		error_exit("Unknown thread error occurred!");
+}
+
+void	thread_handle(pthread_t *thread, t_code code,
+	void *(*start_routine)(void *), void *arg)
+{
+	if (code == CREATE)
+		handle_thread_error(pthread_create(thread, NULL, start_routine, arg), code);
+	else if (code == JOIN)
+		handle_thread_error(pthread_join(*thread, NULL), code);
+	else if (code == DETACH)
+		handle_thread_error(pthread_detach(*thread), code);
+	else
+		error_exit("Wrong code for thread operation!");
+}
+
+static void	handle_mutex_error(int status, t_code code)
 {
 	if (status == 0)
 		return ;
@@ -30,7 +61,7 @@ static void	handle_mutex_error(int status, t_mutex_code code)
 		error_exit("Mutex is locked");
 }
 
-void	mutex_handle(t_mutex *mutex, t_mutex_code code)
+void	mutex_handle(t_mutex *mutex, t_code code)
 {
 	if (code == LOCK)
 		handle_mutex_error(pthread_mutex_lock(mutex), code);

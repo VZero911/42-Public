@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:20:17 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/07 05:35:19 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/08 19:11:20 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <sys/wait.h>
 # include <limits.h>
 
-typedef struct t_data;
+typedef struct s_data t_data;
 typedef pthread_mutex_t t_mutex;
 
 typedef enum e_mutex_code
@@ -34,7 +34,7 @@ typedef enum e_mutex_code
 	CREATE	= 4,
 	JOIN	= 5,
 	DETACH	= 6,
-}		t_mutex_code;
+}		t_code;
 
 typedef struct s_fork
 {
@@ -66,13 +66,17 @@ typedef struct s_data
 	bool	ready_to_start;
 	t_fork  *forks;
 	t_philo *philos;
-}   t_data;
+}		t_data;
 
 void    parse_input(t_data *data, char **argv);
 void    data_init(t_data *philo);
+void    execute_philo(t_data *data);
 
-void	mutex_handle(t_mutex *mutex, t_mutex_code code);
+void	mutex_handle(t_mutex *mutex, t_code code);
+void	thread_handle(pthread_t *thread, t_code code,
+			void *(*start_routine)(void *), void *arg);
 
 void    error_exit(const char *error);
+void	clean_data(t_data *data);
 
 #endif
