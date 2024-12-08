@@ -30,19 +30,6 @@ static void	handle_thread_error(int status, t_code code)
 		error_exit("Unknown thread error occurred!");
 }
 
-void	thread_handle(pthread_t *thread, t_code code,
-	void *(*start_routine)(void *), void *arg)
-{
-	if (code == CREATE)
-		handle_thread_error(pthread_create(thread, NULL, start_routine, arg), code);
-	else if (code == JOIN)
-		handle_thread_error(pthread_join(*thread, NULL), code);
-	else if (code == DETACH)
-		handle_thread_error(pthread_detach(*thread), code);
-	else
-		error_exit("Wrong code for thread operation!");
-}
-
 static void	handle_mutex_error(int status, t_code code)
 {
 	if (status == 0)
@@ -59,6 +46,19 @@ static void	handle_mutex_error(int status, t_code code)
 		error_exit("The process cannot allocate enough memory to create another mutex");
 	else if (status == EBUSY)
 		error_exit("Mutex is locked");
+}
+
+void	thread_handle(pthread_t *thread, t_code code,
+	void *(*start_routine)(void *), void *arg)
+{
+	if (code == CREATE)
+		handle_thread_error(pthread_create(thread, NULL, start_routine, arg), code);
+	else if (code == JOIN)
+		handle_thread_error(pthread_join(*thread, NULL), code);
+	else if (code == DETACH)
+		handle_thread_error(pthread_detach(*thread), code);
+	else
+		error_exit("Wrong code for thread operation!");
 }
 
 void	mutex_handle(t_mutex *mutex, t_code code)
