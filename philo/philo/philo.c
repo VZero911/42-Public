@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:20:13 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/08 19:13:25 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/09 20:45:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main(int argc, char **argv)
 	{
 		parse_input(&data, argv);
 		data_init(&data);
-		// execute_philo(&data);
+		execute_philo(&data);
 		clean_data(&data);
 	}
 	else

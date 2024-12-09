@@ -39,13 +39,11 @@ static void	handle_mutex_error(int status, t_code code)
 	else if (status == EINVAL && code == INIT)
 		error_exit("The value specified by attr is invalid");
 	else if (status == EDEADLK)
-		error_exit("A deadlock would occur if the thread blocked 
-			waiting for mutex");
+		error_exit("A deadlock would occur if the thread blocked waiting for mutex");
 	else if (status == EPERM)
 		error_exit("The current thread does not hold a lock on mutex");
 	else if (status == ENOMEM)
-		error_exit("The process cannot allocate enough memory to create 
-			another mutex");
+		error_exit("The process cannot allocate enough memory to create another mutex");
 	else if (status == EBUSY)
 		error_exit("Mutex is locked");
 	else

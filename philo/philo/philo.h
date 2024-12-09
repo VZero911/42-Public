@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:20:17 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/08 19:11:20 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/09 21:24:48 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct s_data
 	long	start_simulation;
 	bool	end_simulation;
 	bool	ready_to_start;
+	t_mutex	mutex_data;
 	t_fork  *forks;
 	t_philo *philos;
 }		t_data;
@@ -76,7 +77,13 @@ void	mutex_handle(t_mutex *mutex, t_code code);
 void	thread_handle(pthread_t *thread, t_code code,
 			void *(*start_routine)(void *), void *arg);
 
+bool	get_bool(t_mutex *mutex, bool *value);
+long	get_long(t_mutex *mutex, long *value);
+void	set_bool(t_mutex *mutex, bool *dest, bool value);
+void	set_long(t_mutex *mutex, long *dest, long value);
+
 void    error_exit(const char *error);
 void	clean_data(t_data *data);
+void    wait_all_threads(t_data *data);
 
 #endif

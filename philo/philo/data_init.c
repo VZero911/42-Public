@@ -52,15 +52,13 @@ void    data_init(t_data *data)
 
 	i = -1;
 	data->end_simulation = false;
+	mutex_handle(&data->mutex_data, INIT);
 	data->philos = malloc(sizeof(t_philo) * data->philo_nbr);
 	if (!data->philos)
 		error_exit("Malloc Failed");
 	data->forks = malloc(sizeof(t_fork) * data->philo_nbr);
 	if (!data->forks)
-	{
-		free(data->philos);
 		error_exit("Malloc Failed");
-	}
 	while (++i < data->philo_nbr)
 	{
 		mutex_handle(&data->forks[i].fork, INIT);
