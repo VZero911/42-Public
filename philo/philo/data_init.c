@@ -58,7 +58,10 @@ void    data_init(t_data *data)
 		error_exit("Malloc Failed");
 	data->forks = malloc(sizeof(t_fork) * data->philo_nbr);
 	if (!data->forks)
+	{
+		free(data->philos);
 		error_exit("Malloc Failed");
+	}
 	while (++i < data->philo_nbr)
 	{
 		mutex_handle(&data->forks[i].fork, INIT);

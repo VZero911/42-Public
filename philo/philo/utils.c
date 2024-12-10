@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:53:05 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/09 21:26:13 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/10 09:53:34 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ void    clean_data(t_data *data)
 	int i;
 
 	i = -1;
-	while (++i < data->philo_nbr)
-	{
-		mutex_handle(&data->forks[i].fork, DESTROY);
-	}
 	if (data->forks)
+	{
+		while (++i < data->philo_nbr)
+		{
+			mutex_handle(&data->forks[i].fork, DESTROY);
+		}
 		free(data->forks);
+	}
 	if (data->philos)
 		free(data->philos);
 }

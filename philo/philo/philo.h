@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:20:17 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/09 21:24:48 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/10 09:03:47 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <errno.h>
 # include <pthread.h>
 # include <sys/wait.h>
+# include <sys/time.h>
 # include <limits.h>
 
 typedef struct s_data t_data;
