@@ -12,7 +12,7 @@
 
 #include "philo.h"
 
-static void	handle_thread_error(int status, t_code code)
+static void	handle_thread_error(int status, t_mcode code)
 {
 	if (status == 0)
 		return ;
@@ -30,7 +30,7 @@ static void	handle_thread_error(int status, t_code code)
 		error_exit("Unknown thread error occurred!");
 }
 
-static void	handle_mutex_error(int status, t_code code)
+static void	handle_mutex_error(int status, t_mcode code)
 {
 	if (status == 0)
 		return ;
@@ -50,7 +50,7 @@ static void	handle_mutex_error(int status, t_code code)
 		error_exit("Unknown mutex error occurred!");
 }
 
-void	thread_handle(pthread_t *thread, t_code code,
+void	thread_handle(pthread_t *thread, t_mcode code,
 	void *(*start_routine)(void *), void *arg)
 {
 	if (code == CREATE)
@@ -64,7 +64,7 @@ void	thread_handle(pthread_t *thread, t_code code,
 		error_exit("Wrong code for thread operation!");
 }
 
-void	mutex_handle(t_mutex *mutex, t_code code)
+void	mutex_handle(t_mutex *mutex, t_mcode code)
 {
 	if (code == LOCK)
 		handle_mutex_error(pthread_mutex_lock(mutex), code);
