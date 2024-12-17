@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 05:02:08 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/16 20:55:32 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/17 16:37:55 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_point	project_point(t_fdf *data, int x, int y, int z)
 	proj_z = z;
 	rotate_point(&proj_x, &proj_y, &proj_z, data);
 	proj_x += data->shift_x;
+	proj_y += data->shift_y;
 	if (data->projection == ISO)
 		return (project_isometric(proj_x, proj_y, proj_z, data));
 	else if (data->projection == PARALLEL)
