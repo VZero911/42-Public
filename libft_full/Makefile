@@ -38,10 +38,13 @@ SRC      := alpha/ft_isalpha.c \
 			 str/ft_split.c \
 			 printf/ft_printf.c \
 			 printf/ft_printf_parsing.c \
-			 printf/ft_printf_utils.c \
+			 printf/check_for_flags.c \
 			 printf/ft_printf_type.c \
-			 printf/ft_printf_type2.c \
+			 printf/apply_flags.c \
 			 printf/ft_printf_hex.c \
+			 printf/ft_printf_str.c \
+			 printf/ft_printf_int.c \
+			 printf/ft_printf_uint.c \
 			 gnl/get_next_line.c \
 			 gnl/get_next_line_utils.c \
 

@@ -6,13 +6,13 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/28 23:57:30 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/17 12:20:35 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
 
-t_type	ft_get_type(char c)
+static t_type	ft_get_specifier(char c)
 {
 	if (c == 'c')
 		return (SPECIFIER_CHAR);
@@ -33,7 +33,7 @@ t_type	ft_get_type(char c)
 	return (SPECIFIER_NONE);
 }
 
-t_var	ft_get_var(t_struct *data, va_list *args)
+static t_var	ft_get_var(t_struct *data, va_list *args)
 {
 	t_var	var;
 
@@ -53,20 +53,22 @@ t_var	ft_get_var(t_struct *data, va_list *args)
 	return (var);
 }
 
-void	ft_get_data(const char **str, va_list *args, t_struct *data)
+static void	ft_get_data(const char **str, va_list *args, t_struct *data)
 {
 	char	*current;
 
 	current = (char *)(*str) + 1;
-	data->type = ft_get_type(*current);
+	check_for_flags(&current, data);
 	if (ft_strchr(SPECIFIER, *current) && *current)
 	{
-		data->var = ft_get_var(data, args);
+		data->type = ft_get_specifier(*current);
+		if (args)
+			data->var = ft_get_var(data, args);
 		*str = current;
 	}
 }
 
-void	ft_printf_data(t_struct *data)
+static void	ft_printf_data(t_struct *data)
 {
 	if (data->type == SPECIFIER_CHAR)
 		ft_printf_char(data);
@@ -81,9 +83,9 @@ void	ft_printf_data(t_struct *data)
 	else if (data->type == SPECIFIER_PERCENTAGE)
 		ft_printf_percentage(data);
 	else if (data->type == SPECIFIER_HEX_LOW)
-		ft_printf_hex_low(data);
+		ft_printf_hex(data, HEXA);
 	else if (data->type == SPECIFIER_HEX_UP)
-		ft_printf_hex_up(data);
+		ft_printf_hex(data, HEXA_UP);
 }
 
 int	ft_printf_parsing(const char *str, va_list *args)

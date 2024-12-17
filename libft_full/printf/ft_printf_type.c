@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/11/28 23:57:32 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/17 12:20:45 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,68 @@
 
 void	ft_printf_char(t_struct *data)
 {
-	int	c;
+	int		c;
+	char	padding;
+	int		padlen;
 
 	c = data->var.c;
-	ft_putchar_fd(c, 1);
-	ft_data_len(data, 1);
+	padlen = data->width - 1;
+	padding = padding_char(data);
+	if (data->flags == FLAG_LEFT_ALIGN)
+	{
+		ft_putchar_fd(c, 1);
+		apply_padding(padding, padlen);
+	}
+	else
+	{
+		apply_padding(padding, padlen);
+		ft_putchar_fd(c, 1);
+	}
+	if (data->width > 1)
+		ft_data_len(data, data->width);
+	else
+		ft_data_len(data, 1);
 }
 
-void	ft_printf_string(t_struct *data)
+static char	*ft_pointer_to_str(t_ull ptr, const char *base)
 {
 	char	*str;
+	char	*prefix;
+	char	*hex;
 
-	str = data->var.s;
-	ft_putstr_fd(str, 1);
-	ft_data_len(data, ft_strlen(str));
+	prefix = ft_strdup("0x");
+	hex = ft_ulltoa_base(ptr, base);
+	str = ft_strjoin(prefix, hex);
+	free(prefix);
+	free(hex);
+	return (str);
 }
 
 void	ft_printf_pointer(t_struct *data)
 {
 	void	*ptr;
-	int		len;
+	char	*print_str;
+	int		strlen;
+	int		padlen;
+	char	padding;
 
 	ptr = data->var.p;
-	len = ft_pointer_fd((unsigned long long)ptr, "0123456789abcdef");
-	ft_data_len(data, len);
-}
-
-void	ft_printf_int(t_struct *data)
-{
-	int	nb;
-	int	len;
-
-	nb = data->var.i;
-	len = ft_putnum_fd(nb, 1);
-	ft_data_len(data, len);
+	if (ptr == NULL)
+		print_str = ft_strdup("(nil)");
+	else
+		print_str = ft_pointer_to_str((t_ull)ptr, HEXA);
+	strlen = ft_strlen(print_str);
+	if (data->width > strlen)
+		padlen = data->width - strlen;
+	else
+		padlen = 0;
+	padding = padding_char(data);
+	print_and_pad(print_str, padlen, padding, data);
+	if (data->width > strlen)
+		ft_data_len(data, data->width);
+	else
+		ft_data_len(data, strlen);
+	free(print_str);
 }
 
 void	ft_printf_percentage(t_struct *data)

@@ -25,6 +25,15 @@
 # define BUFFER_SIZE 42
 # define FD_MAX 1024
 # define SPECIFIER	"cspdiuxX%"
+# define FLAGS	"-0# +"
+# define HEXA "0123456789abcdef"
+# define HEXA_UP "0123456789ABCDEF"
+# define FLAG_LEFT_ALIGN    0x1
+# define FLAG_ZERO_PADDING  0x2
+# define FLAG_HASH          0x4
+# define FLAG_SPACE         0x8
+# define FLAG_PLUS          0x10
+# define FLAG_PRECISION     0x20
 
 typedef struct s_list
 {
@@ -60,7 +69,12 @@ typedef struct s_data
 	t_type	type;
 	t_var	var;
 	int		len;
+	int		flags;
+	int		width;
+	int		precision;
 }	t_struct;
+
+typedef unsigned long long	t_ull;
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
@@ -110,28 +124,25 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 int		ft_printf(const char *str, ...);
 
 int		ft_printf_parsing(const char *str, va_list *args);
-void	ft_get_data(const char **str, va_list *args, t_struct *data);
-void	ft_printf_data(t_struct *data);
-t_type	ft_get_type(char c);
-t_var	ft_get_var(t_struct *data, va_list *args);
 
 void	ft_printf_char(t_struct *data);
 void	ft_printf_string(t_struct *data);
 void	ft_printf_percentage(t_struct *data);
 void	ft_printf_pointer(t_struct *data);
 void	ft_printf_int(t_struct *data);
-
 void	ft_printf_uint(t_struct *data);
-void	ft_printf_hex_low(t_struct *data);
-void	ft_printf_hex_up(t_struct *data);
+void	ft_printf_hex(t_struct *data, const char *base);
+
+char	*apply_int_precision(char *nb_str, t_struct *data);
+char	*ft_ulltoa_base(t_ull n, const char *base);
+
+void	check_for_flags(char **current, t_struct *data);
 
 void	ft_data_len(t_struct *data, int len);
-int		ft_pointer_fd(unsigned long long ptr, char *base);
-int		ft_putnum_fd(int nb, int fd);
-int		ft_putunum_fd(unsigned int nb, int fd);
-
-int		ft_putnbr_hex_low(unsigned int nb);
-int		ft_putnbr_hex_up(unsigned int nb);
+void	apply_padding(char pad_char, int len);
+void	print_and_pad(char *print_str,
+			int padlen, char padding, t_struct *data);
+char	padding_char(t_struct *data);
 
 char	*get_next_line(int fd);
 size_t	ft_strlen_gnl(const char *str);
