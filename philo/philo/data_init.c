@@ -42,6 +42,7 @@ static void	philo_init(t_data *data)
 		philo->full = false;
 		philo->meals_counter = 0;
 		philo->data = data;
+		philo->last_meal_time = 0;
 		mutex_handle(&philo->mutex_philo, INIT);
 		assign_forks(philo, data->forks, i);
 	}
@@ -52,7 +53,7 @@ void    data_init(t_data *data)
 	int	i;
 
 	i = -1;
-	data->end_simulation = false;
+	data->simulation_stop = false;
 	data->ready_to_start = false;
 	data->philos = malloc(sizeof(t_philo) * data->philo_nbr);
 	if (!data->philos)

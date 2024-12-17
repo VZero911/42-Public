@@ -46,7 +46,12 @@ long	get_long(t_mutex *mutex, long *value)
 	return (res);
 }
 
-bool	simulation_finished(t_data *data)
+bool simulation_finished(t_data *data)
 {
-	return (get_bool(&data->mutex_data, &data->end_simulation));
+    bool stop;
+
+    mutex_handle(&data->mutex_data, LOCK);
+    stop = data->simulation_stop;
+    mutex_handle(&data->mutex_data, UNLOCK);
+    return (stop);
 }

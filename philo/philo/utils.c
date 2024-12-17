@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:53:05 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/11 01:41:02 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/17 03:08:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,6 @@ void    clean_data(t_data *data)
 void    error_exit(const char *error)
 {
 	
-	// if (data->forks)
-	// 	free(data->forks);
-	// if (data->philos)
-	// 	free(data->philos);
 	printf("%s\n", error);
 	exit(EXIT_FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:20:17 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/11 02:22:32 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/17 02:31:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_data
 	long	time_to_sleep;
 	long	meals_limit;
 	long	start_simulation;
-	bool	end_simulation;
+	bool	simulation_stop;
 	bool	ready_to_start;
 	t_mutex	mutex_data;
 	t_mutex	mutex_write;
