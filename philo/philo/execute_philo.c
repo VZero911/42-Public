@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:58:24 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/17 03:50:31 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/17 04:13:07 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void *start_routine(void *arg)
     t_philo *philo;
     
     philo = (t_philo *)arg;
-    if (philo->id % 2)
+    if (philo->id % 2 == 0)
         precise_usleep(philo->data->time_to_eat / 10, philo->data);
     wait_all_threads(philo->data);
     while (!simulation_finished(philo->data))
