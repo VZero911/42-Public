@@ -46,7 +46,7 @@ long	get_long(t_mutex *mutex, long *value)
 	return (res);
 }
 
-bool simulation_finished(t_data *data)
+bool	simulation_finished(t_data *data)
 {
     bool stop;
 

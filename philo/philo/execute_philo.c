@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 18:58:24 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/17 03:35:56 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/17 03:50:31 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void    *monitor_death(void *arg)
     int     full_philos;
 
     data = (t_data *)arg;
-
     while (!simulation_finished(data))
     {
         full_philos = 0;
@@ -82,7 +81,7 @@ void    *monitor_death(void *arg)
             current_time = get_time(MILLISECOND);
             mutex_handle(&data->philos[i].mutex_philo, LOCK);
             if (!data->philos[i].full && 
-                (current_time - data->philos[i].last_meal_time) >= data->time_to_die)
+                (current_time - data->philos[i].last_meal_time) >= data->time_to_die / 1e3)
             {
                 write_status(DIED, &data->philos[i], MODE);
                 set_bool(&data->mutex_data, &data->simulation_stop, true);

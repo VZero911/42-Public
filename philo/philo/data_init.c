@@ -42,7 +42,7 @@ static void	philo_init(t_data *data)
 		philo->full = false;
 		philo->meals_counter = 0;
 		philo->data = data;
-		philo->last_meal_time = 0;
+		philo->last_meal_time = get_time(MILLISECOND);
 		mutex_handle(&philo->mutex_philo, INIT);
 		assign_forks(philo, data->forks, i);
 	}
