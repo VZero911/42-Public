@@ -1,6 +1,6 @@
 NAME := philo
 CFLAGS := -Wall -Wextra -Werror
-SRC := philo.c parsing.c utils.c data_init.c mutex_thread.c execute_philo.c getters_setters.c write.c\
+SRC := main.c error.c data_init.c utils.c simulation.c\
 
 OBJ := $(SRC:.c=.o)
 

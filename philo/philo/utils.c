@@ -6,79 +6,48 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:53:05 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/17 03:08:10 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/17 06:52:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	precise_usleep(long usec, t_data *data)
-{
-	long	start;
-	long	elapsed;
-	long	rem;
-
-	start = get_time(MICROSECOND);
-	while (get_time(MICROSECOND) - start < usec)
-	{
-		if (simulation_finished(data))
-			break ;
-		elapsed = get_time(MICROSECOND);
-		rem = usec - elapsed;
-		if (rem > 1e3)
-			usleep(rem /2);
-		else
-		{
-			while (get_time(MICROSECOND) - start < usec)
-				;
-		}
-	}
-}
-
-long	get_time(t_tcode code)
+long	timestamp(void)
 {
 	struct timeval	tv;
-	
+
 	if (gettimeofday(&tv, NULL))
-		error_exit("Gettimeoftheday failed");
-	if (code == SECOND)
-		return (tv.tv_sec + (tv.tv_usec / 1e6));
-	else if (code == MILLISECOND)
-		return ((tv.tv_sec * 1e3) + (tv.tv_usec / 1e3));
-	else if (code == MICROSECOND)
-		return ((tv.tv_sec * 1e6) + tv.tv_usec);
-	else
-		error_exit("Wrong Input");
-	return (0);
+		error_exit("Gettimeofday failed");
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }
 
-void    wait_all_threads(t_data *data)
+void	precise_usleep(long time, t_data *data)
 {
-	while (!get_bool(&data->mutex_data, &data->ready_to_start))
-		usleep(100);
-}
+	long	start;
 
-
-void    clean_data(t_data *data)
-{
-	int i;
-
-	i = -1;
-	if (data->forks)
+	start = timestamp();
+	while (!(data->has_died))
 	{
-		while (++i < data->philo_nbr)
-		{
-			mutex_handle(&data->forks[i].fork, DESTROY);
-		}
-		free(data->forks);
+		if (time_diff(start, timestamp() >= time))
+			break ;
+		usleep(25);
 	}
-	if (data->philos)
-		free(data->philos);
 }
 
-void    error_exit(const char *error)
+long	time_diff(long past, long present)
 {
-	
-	printf("%s\n", error);
-	exit(EXIT_FAILURE);
+	return (present - past);
+}
+
+void	action_print(t_data *data, int id, char *string)
+{
+	pthread_mutex_lock(&(data->writing));
+	if (!(data->has_died))
+	{
+		printf("%li ", timestamp() - data->first_timestamp);
+		printf("%i ", id + 1);
+		printf("%s\n", string);
+	}
+	pthread_mutex_unlock(&(data->writing));
+	return ;
 }
