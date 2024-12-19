@@ -58,7 +58,7 @@ void	validate_map(t_fdf *data)
 
 	fd = open(data->file_name, O_RDONLY);
 	if (fd < 0)
-		free_data(data), error("Cannot open file");
+		error("Cannot open file", data);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -78,10 +78,10 @@ void	get_map_dimensions(t_fdf *data)
 	data->width = 0;
 	fd = open(data->file_name, O_RDONLY);
 	if (fd < 0)
-		free_data(data), error("Cannot open file");
+		error("Cannot open file", data);
 	line = get_next_line(fd);
 	if (!line)
-		error("Empty file");
+		error("empty Line", data);
 	init_width(data, line);
 	data->height = 1;
 	line = get_next_line(fd);
@@ -106,10 +106,10 @@ void	read_file(t_fdf *data)
 	validate_map(data);
 	data->z_matrix = create_matrix(data->height, data->width);
 	if (!data->z_matrix)
-		error("Matrix allocation failed");
+		error("Matrix allocation failed", data);
 	fd = open(data->file_name, O_RDONLY);
 	if (fd < 0)
-		error("Cannot reopen file");
+		error("Cannot reopen file", data);
 	i = 0;
 	line = get_next_line(fd);
 	while (i < data->height && line)

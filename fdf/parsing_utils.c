@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 05:02:08 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/23 05:47:49 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/19 15:07:32 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	process_line_width(t_fdf *data, char *line)
 	if (line_width != data->width)
 	{
 		free(line);
-		error("Inconsistent line width in map");
+		error("Inconsistent line width in map", data);
 	}
 }
 
@@ -53,9 +53,9 @@ int	check_file_name(char *file_name)
 
 	i = ft_strlen(file_name);
 	if (i < 4)
-		error("Wrong Format should be <.fdf>");
+		error("Wrong Format should be <.fdf>", NULL);
 	if (file_name[i - 1] != 'f' || file_name[i - 2] != 'd' || i < 4
 		|| file_name[i - 3] != 'f' || file_name[i - 4] != '.')
-		error("Wrong Format should be <.fdf>");
+		error("Wrong Format should be <.fdf>", NULL);
 	return (0);
 }

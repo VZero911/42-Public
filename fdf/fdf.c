@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:13 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/06 21:25:26 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/19 15:07:11 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 		check_file_name(argv[1]);
 		data = (t_fdf *)malloc(sizeof(t_fdf));
 		if (!data)
-			error("Malloc error");
+			error("Malloc error", NULL);
 		data->file_name = argv[1];
 		data->zoom = 5.0;
 		data->y = 0;
@@ -38,5 +38,5 @@ int	main(int argc, char **argv)
 		free_data(data);
 	}
 	else
-		error("Wrong number of Arguments");
+		error("Wrong number of Arguments", NULL);
 }

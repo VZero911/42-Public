@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:02 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/16 21:00:20 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/19 15:06:39 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int		**create_matrix(int height, int width);
 void	fill_matrix_line(int *z_line, char *line, int width);
 
 int		data_init(t_fdf *data);
-int		error(char *str);
+int		error(char *str, t_fdf *data);
 
 void    draw_map(t_fdf *data);
 int		handle_close(t_fdf *data);
