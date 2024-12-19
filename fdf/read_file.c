@@ -58,7 +58,7 @@ void	validate_map(t_fdf *data)
 
 	fd = open(data->file_name, O_RDONLY);
 	if (fd < 0)
-		error("Cannot open file");
+		free_data(data), error("Cannot open file");
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -78,7 +78,7 @@ void	get_map_dimensions(t_fdf *data)
 	data->width = 0;
 	fd = open(data->file_name, O_RDONLY);
 	if (fd < 0)
-		error("Cannot open file");
+		free_data(data), error("Cannot open file");
 	line = get_next_line(fd);
 	if (!line)
 		error("Empty file");
@@ -101,6 +101,7 @@ void	read_file(t_fdf *data)
 	char	*line;
 	int		i;
 
+	data->z_matrix = NULL;
 	get_map_dimensions(data);
 	validate_map(data);
 	data->z_matrix = create_matrix(data->height, data->width);
