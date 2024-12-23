@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:20:17 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/17 06:50:27 by marvin           ###   ########.fr       */
+/*   Updated: 2024/12/23 20:45:24 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct			s_data
 int		write_error(char *str);
 void    error_exit(const char *error);
 int		error_main(int error);
+void    start_simulation(t_data *data);
 
 long	timestamp(void);
 void	precise_usleep(long time, t_data *data);

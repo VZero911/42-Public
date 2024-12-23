@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 18:53:05 by jdumay            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/12/17 06:52:46 by marvin           ###   ########.fr       */
-=======
-/*   Updated: 2024/12/16 21:10:05 by jdumay           ###   ########.fr       */
->>>>>>> fb6edcf (Little change)
+/*   Updated: 2024/12/23 21:07:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +28,9 @@ void	precise_usleep(long time, t_data *data)
 	start = timestamp();
 	while (!(data->has_died))
 	{
-		if (time_diff(start, timestamp() >= time))
+		if (time_diff(start, timestamp()) >= time)
 			break ;
-		usleep(25);
+		usleep(50);
 	}
 }
 

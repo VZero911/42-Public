@@ -94,16 +94,15 @@ int	data_init(t_data *data, char **argv)
 	data->time_sleep = ft_atol(argv[4]);
 	data->full = 0;
 	data->has_died = 0;
-	if ( data->time_death < 60 || data->time_eat < 60
-		|| data->time_sleep < 60)
-		return (error_exit("Timestamp should be bigger than 60 ms"), 1);
-	if (data->nb_philo < 2 || data->nb_philo > 250)
-		return (1);
+	if (data->nb_philo < 1 || data->nb_philo > 200)
+		return (error_exit("Number of philosophers must be between 1 and 200"), 1);
+	if (data->time_death < 60 || data->time_eat < 60 || data->time_sleep < 60)
+		return (error_exit("Times must be at least 60ms"), 1);
 	if (argv[5])
 	{
 		data->nb_eat = ft_atol(argv[5]);
 		if (data->nb_eat <= 0)
-			return (1);
+			return (error_exit("Number of meals must be positive"), 1);
 	}
 	else
 		data->nb_eat = -1;
