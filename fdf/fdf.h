@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 22:50:02 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/19 15:06:39 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/26 20:39:55 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,9 @@
 
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
-# define MAX_SHIFT (WIN_WIDTH / 2)
 # define MLX_ERROR 1
 # define ISO_ANGLES 0.523599
-# define Event_close 17
+# define EVENT_CLOSE 17
 # define MOUSE_WHEEL_DOWN 4
 # define MOUSE_WHEEL_UP 5
 # define ZOOM_FACTOR 1.1
@@ -49,54 +48,54 @@
 
 typedef enum e_projection
 {
-    ISO = 1,
-    PARALLEL = 2,
+	ISO = 1,
+	PARALLEL = 2,
 	TOP = 3,
-    MILITARY = 4,
-    CABINET = 5
+	MILITARY = 4,
+	CABINET = 5
 }	t_projection;
 
 typedef struct s_point
 {
-	double  x;
-	double  y;
-	int     z;
-	int     color;
-    int		init_color;
-	double  delta_x;
-	double  delta_y;
-	int     steps;
-	double  x_increment;
-	double  y_increment;
+	double	x;
+	double	y;
+	int		z;
+	int		color;
+	int		init_color;
+	double	delta_x;
+	double	delta_y;
+	int		steps;
+	double	x_increment;
+	double	y_increment;
 }	t_point;
 
 typedef struct s_fdf
 {
-	void    *mlx_ptr;
-	void    *win_ptr;
-	void    *image;
-	char    *adress;
-	char    *file_name;
-	int     bits_per_pixel;
-	int     line_length;
-	int     endian;
-	int     width;
-	int     height;
-	int     **z_matrix;
-	int		**color_matrix;
-	double     zoom;
-	int     x;
-	int     y;
-	int		shift_x;
-	int		shift_y;
-	int		coef;
-	double rotation_x;
-    double rotation_y;
-    double rotation_z;
-	t_point current;
-	t_point right;
-	t_point down;
-	t_projection projection;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	void			*image;
+	char			*adress;
+	char			*file_name;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+	int				width;
+	int				height;
+	int				**z_matrix;
+	int				**color_matrix;
+	double			zoom;
+	int				x;
+	int				y;
+	int				shift_x;
+	int				shift_y;
+	int				coef;
+	double			rotation_x;
+	double			rotation_y;
+	double			rotation_z;
+	t_point			current;
+	t_point			right;
+	t_point			down;
+	t_projection	projection;
 }	t_fdf;
 
 void	read_file(t_fdf *data);
@@ -108,14 +107,14 @@ void	fill_matrix_line(int *z_line, char *line, int width);
 int		data_init(t_fdf *data);
 int		error(char *str, t_fdf *data);
 
-void    draw_map(t_fdf *data);
+void	draw_map(t_fdf *data);
 int		handle_close(t_fdf *data);
 int		process_space(int keysym, t_fdf *data);
 
 int		check_file_name(char *file_name);
 void	free_matrix(int **matrix, int height);
 void	free_split(char **split);
-int     calculate_color(int z1, int z2);
+int		calculate_color(int z1, int z2);
 
 void	init_width(t_fdf *data, char *line);
 int		count_split_elements(char **split);
@@ -124,8 +123,8 @@ void	free_data(t_fdf *data);
 
 t_point	project_parallel(double x, double y, double z, t_fdf *data);
 t_point	project_isometric(double x, double y, double z, t_fdf *data);
-t_point project_top(double x, double y, double z, t_fdf *data);
-t_point project_military(double x, double y, double z, t_fdf *data);
-t_point project_cabinet(double x, double y, double z, t_fdf *data);
+t_point	project_top(double x, double y, double z, t_fdf *data);
+t_point	project_military(double x, double y, double z, t_fdf *data);
+t_point	project_cabinet(double x, double y, double z, t_fdf *data);
 
 #endif

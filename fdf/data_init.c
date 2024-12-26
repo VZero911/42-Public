@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   data_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/23 05:02:08 by jdumay            #+#    #+#             */
-/*   Updated: 2024/11/23 05:02:19 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/26 20:35:41 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	setup_hooks(t_fdf *data)
 {
 	mlx_mouse_hook(data->win_ptr, handle_mouse, data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data);
-	mlx_hook(data->win_ptr, Event_close, 0, handle_close, data);
+	mlx_hook(data->win_ptr, EVENT_CLOSE, 0, handle_close, data);
 }
 
 int	data_init(t_fdf *data)

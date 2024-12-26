@@ -55,7 +55,7 @@ int	handle_user_input(char *input, t_state *state)
 		return (EXIT_FAILURE);
 	}
 	cmd = parse_input(&cmd, input, state->envp);
-	// print_command_list(cmd);
+	print_command_list(cmd);
 	if (cmd)
 		exec_shell(cmd, state);
 	else
