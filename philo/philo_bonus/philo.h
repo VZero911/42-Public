@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 16:20:17 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/26 20:29:28 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/27 22:36:19 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include <stdbool.h>
 # include <errno.h>
 # include <pthread.h>
+# include <semaphore.h>
+# include <fcntl.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <sys/time.h>
 # include <limits.h>
@@ -54,9 +57,9 @@ typedef struct s_data
 	int			has_died;
 	int			full;
 	long		first_timestamp;
-	t_mutex		meal_check;
-	t_mutex		writing;
-	t_mutex		forks[250];
+	sem_t		*meal_check;
+	sem_t		*writing;
+	sem_t		*forks;
 	t_philo		philos[250];
 }		t_data;
 

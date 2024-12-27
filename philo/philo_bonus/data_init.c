@@ -52,20 +52,27 @@ static long	ft_atol(const char *str)
 	return (num);
 }
 
-static int	init_mutex(t_data *data)
+static int	init_semaphore(t_data *data)
 {
-	int	i;
-
-	i = data->nb_philo;
-	while (--i >= 0)
+	sem_unlink("/philo_forks");
+	sem_unlink("/philo_writing");
+	sem_unlink("/philo_meal_check");
+	data->forks = sem_open("/philo_forks", O_CREAT, S_IRWXU, data->nb_philo);
+	if (data->forks == SEM_FAILED)
+		return (1);
+	data->writing = sem_open("/philo_writing", O_CREAT, S_IRWXU, 1);
+	if (data->writing == SEM_FAILED)
 	{
-		if (pthread_mutex_init(&(data->forks[i]), NULL))
-			return (1);
+		sem_unlink("/philo_forks");
+		return (1);
 	}
-	if (pthread_mutex_init(&(data->writing), NULL))
+	data->meal_check = sem_open("/philo_meal_check", O_CREAT, S_IRWXU, 1);
+	if (data->meal_check == SEM_FAILED)
+	{
+		sem_unlink("/philo_forks");
+		sem_unlink("/philo_writing");
 		return (1);
-	if (pthread_mutex_init(&(data->meal_check), NULL))
-		return (1);
+	}
 	return (0);
 }
 
@@ -78,8 +85,6 @@ static int	init_philos(t_data *data)
 	{
 		data->philos[i].id = i;
 		data->philos[i].x_ate = 0;
-		data->philos[i].left_fork_id = i;
-		data->philos[i].right_fork_id = (i + 1) % data->nb_philo;
 		data->philos[i].last_meal = 0;
 		data->philos[i].data = data;
 	}
@@ -106,7 +111,7 @@ int	data_init(t_data *data, char **argv)
 	}
 	else
 		data->nb_eat = -1;
-	if (init_mutex(data))
+	if (init_semaphore(data))
 		return (2);
 	init_philos(data);
 	return (0);
