@@ -58,11 +58,7 @@ void PhoneBook::searchContact() const
 	std::cin.ignore();
 
 	if (index < 1 || index > 8 || contacts[index - 1].getFirstName().empty())
-	{
 		std::cout << "Invalid index!" << std::endl;
-	}
 	else
-	{
 		contacts[index - 1].display();
-	}
 }
