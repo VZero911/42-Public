@@ -27,6 +27,8 @@ void	philo_eats(t_philo *philo)
 	sem_post(data->meal_check);
 	precise_usleep(data->time_eat, data);
 	(philo->x_ate)++;
+	if (philo->x_ate == data->nb_eat)
+		philo->is_full = 1;
 	sem_post(data->forks);
 	sem_post(data->forks);
 }
@@ -49,11 +51,11 @@ void	*routine(void *void_philo)
 	while (!(data->has_died))
 	{
 		philo_eats(philo);
-		if (data->full)
-			break ;
 		action_print(data, philo->id, "is sleeping");
 		precise_usleep(data->time_sleep, data);
 		action_print(data, philo->id, "is thinking");
+		if (data->full || philo->is_full)
+			break ;
 	}
 	return (NULL);
 }

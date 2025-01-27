@@ -85,6 +85,7 @@ static int	init_philos(t_data *data)
 	{
 		data->philos[i].id = i;
 		data->philos[i].x_ate = 0;
+		data->philos[i].is_full = 0;
 		data->philos[i].last_meal = 0;
 		data->philos[i].data = data;
 	}
