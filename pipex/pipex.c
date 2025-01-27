@@ -6,7 +6,7 @@
 /*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 01:09:29 by jdumay            #+#    #+#             */
-/*   Updated: 2024/12/08 15:38:12 by jdumay           ###   ########.fr       */
+/*   Updated: 2025/01/27 14:49:23 by jdumay           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(int argc, char **argv, char **envp)
 		return (ft_putstr_fd("heredoc EOF \"cmd1\" \"cmd2\" outfile\n", 2), 0);
 	}
 	init_pipex(&pipex, argc, argv);
-	if (!ft_strncmp(pipex.input_file, "here_doc", 8))
+	if (!ft_strncmp(pipex.input_file, "here_doc", 9))
 	{
 		if (!(argc == 6))
 		{
