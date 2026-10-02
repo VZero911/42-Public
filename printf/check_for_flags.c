@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_for_flags.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdumay <jdumay@student.42.fr>              +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:13:05 by marvin            #+#    #+#             */
-/*   Updated: 2024/12/10 12:08:40 by jdumay           ###   ########.fr       */
+/*   Updated: 2024/12/04 22:32:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,11 @@ void	check_for_flags(char **current, t_struct *data)
 	while (**current && ft_strchr(FLAGS, **current))
 	{
 		if (**current == '-')
-			data->flags |= FLAG_LEFT_ALIGN;// ou 1 si ya rien 0 si quelque chose assigne = + 1 
+			data->flags |= FLAG_LEFT_ALIGN;
 		else if (**current == '0' && !(data->flags & FLAG_LEFT_ALIGN))
-			data->flags |= FLAG_ZERO_PADDING;// + 2
+			data->flags |= FLAG_ZERO_PADDING;
 		else if (**current == '#')
-			data->flags |= FLAG_HASH;// + 4
+			data->flags |= FLAG_HASH;
 		else if (**current == '+')
 			data->flags |= FLAG_PLUS;
 		else if (**current == ' ' && !(data->flags & FLAG_PLUS))

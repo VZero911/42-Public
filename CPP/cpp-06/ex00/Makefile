@@ -1,6 +1,6 @@
-NAME = 28B
+NAME = ScalarConveter
 
-SRCS = main.cpp Bureaucrat.cpp AForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp PresidentialPardonForm.cpp
+SRCS = main.cpp ScalarConveter.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
