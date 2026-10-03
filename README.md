@@ -1,3 +1,7 @@
+<!-- banner -->
+<p align="center"><img src="assets/banner.svg" alt="42" width="100%" /></p>
+<!-- /banner -->
+
 <div align="center">
 
 # 🎓 42 — projects
