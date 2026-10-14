@@ -22,4 +22,4 @@ Each folder is the final version of a project (the original repositories are arc
 | [`philo`](philo/) | C | The dining philosophers: threads, mutexes, no data race |
 | [`CPP`](CPP/) | C++ | The C++ modules: classes, inheritance, templates, STL |
 
-More of my work: [🌱 The Seed](https://github.com/VZero911/The_Seed.V0-Public) — a Web3 + AI game.
+More of my work: [🌱 The Seed](https://github.com/VZero911/THESEED) — Blockchain/Data infrastructure.
